@@ -110,6 +110,9 @@ class Scraper:
                     # define the full data URL of the location
                     new_location_dictionary['full_data_URL'] = description_of_the_location_URL
 
+                    # field that help me to know if the data that i have is the full or not
+                    new_location_dictionary['is_data_full'] = False
+
 
                     self.data.append(new_location_dictionary)
 
@@ -146,5 +149,5 @@ async def main():
     print(s.data)
 
 # Run the event loop
-# import asyncio
-# asyncio.get_event_loop().run_until_complete(main())
+import asyncio
+asyncio.get_event_loop().run_until_complete(main())
