@@ -92,15 +92,25 @@ def update_data(collection_name, document_id, update_data):
         return False
 
 # function that help me to get the id of the document from the firebase 
-# query_constraints = [("field_name", "==", "value")]
-def get_document_id(collection_name, query_constraints=None):
+def get_document_id(collection_name, query_constraints):
     try:
-        docs = db.collection(collection_name).where(*query_constraints).get() if query_constraints else db.collection(collection_name).get()
+        collection_ref = db.collection(collection_name)
+        
+        query = collection_ref
+        for field, op, value in query_constraints:
+            query = query.where(filter=FieldFilter(field, op, value))
+        docs = query.stream()
+            
         document_ids = [doc.id for doc in docs]
         return document_ids
     except Exception as e:
         print("Error getting document IDs:", e)
         return []
+
+# test get the id and update something in 
+# try_id = get_document_id('tel aviv' , [("name", "==", "Poli House")] )
+# print(try_id)
+# print(update_data('tel aviv' , try_id[0] ,{'is_data_full': False} ))
 
 # some function to check the code test the code 
 # add_content_to_firestore( 'User',{'name':'rame' , 'age' : 26} )
