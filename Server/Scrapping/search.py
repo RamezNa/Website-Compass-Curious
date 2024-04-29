@@ -129,13 +129,15 @@ class Scraper:
                     new_location_dictionary['img'] = await self.resize_image_url(url_img, 1920, 1920)
                                         
                     # define the data of the location
-                    new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' )
+                    new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' ).text
 
                     # get the url of the full data
                     description_of_the_location_URL = 'https://www.lonelyplanet.com' + (child.find('a')).get('href')
 
                     # define the full data URL of the location
                     new_location_dictionary['full_data_URL'] = description_of_the_location_URL
+
+                    new_location_dictionary['full_data'] = ''
 
                     # field that help me to know if the data that i have is the full or not
                     new_location_dictionary['is_data_full'] = False
@@ -145,8 +147,9 @@ class Scraper:
 
                 except AttributeError as e:
                     break;
-                    pass    
-            
+                      
+            # TODO Remove the break
+            break;
             # self.time_to_wait *= 100
             # get the new Page to search in
             try:
@@ -169,13 +172,12 @@ class Scraper:
         return data_location_html_file.find('div' , class_ = 'readMore_content__bv7mp').text
                     
 
+# async def main():
+#     s = Scraper()
+#     await s.search('tel aviv')
+#     print('all work very good')
+#     print(s.data)
 
-async def main():
-    s = Scraper()
-    await s.search('tel aviv')
-    print('all work very good')
-    print(s.data)
-
-# Run the event loop
-import asyncio
-asyncio.get_event_loop().run_until_complete(main())
+# # Run the event loop
+# import asyncio
+# asyncio.get_event_loop().run_until_complete(main())
