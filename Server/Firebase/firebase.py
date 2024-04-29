@@ -78,8 +78,29 @@ def get_spesific_content_filtered_by_type_from_firestore(collection_name , type)
     return location_list    
 
 
-# function that help me to update content in the firebase if i need TODO
-# function that help me to delete content in the firebase if i need TODO
+# function that help me to update content in the firebase 
+def update_data(collection_name, document_id, update_data):
+    try:
+
+        doc_ref = db.collection(collection_name).document(document_id)
+        doc_ref.update(update_data)
+        return True
+    
+    except Exception as e:
+
+        print("Error updating document:", e)
+        return False
+
+# function that help me to get the id of the document from the firebase 
+# query_constraints = [("field_name", "==", "value")]
+def get_document_id(collection_name, query_constraints=None):
+    try:
+        docs = db.collection(collection_name).where(*query_constraints).get() if query_constraints else db.collection(collection_name).get()
+        document_ids = [doc.id for doc in docs]
+        return document_ids
+    except Exception as e:
+        print("Error getting document IDs:", e)
+        return []
 
 # some function to check the code test the code 
 # add_content_to_firestore( 'User',{'name':'rame' , 'age' : 26} )
@@ -87,10 +108,10 @@ def get_spesific_content_filtered_by_type_from_firestore(collection_name , type)
 # print(await read_content_from_firestore('tel aviv'))
 
 # print(get_spesific_content_filtered_by_type_from_firestore('User' , 24))
-import asyncio
+# import asyncio
 
-async def main():
-    print(await read_content_from_firestore('tel aviv'))
+# async def main():
+#     print(await read_content_from_firestore('tel aviv'))
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
