@@ -4,6 +4,9 @@ from requests.adapters import HTTPAdapter
 from requests.exceptions import RetryError
 from requests_html import HTMLSession
 from pyppeteer import launch
+# used to help me change the width and the height of the picture 
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+
 
 class Scraper:
     
@@ -44,6 +47,29 @@ class Scraper:
         return BeautifulSoup(html_content , 'lxml')
     
 
+    # fuction that help me to change the width and the height of the url 
+    async def resize_image_url(self, url, width, height):
+        # Parse the URL
+        parsed_url = urlparse(url)
+        query_params = parse_qs(parsed_url.query)
+
+        # Update width and height parameters
+        query_params['w'] = [str(width)]
+        query_params['h'] = [str(height)]
+
+        # Reconstruct the URL with updated parameters
+        updated_query = urlencode(query_params, doseq=True)
+        updated_url = urlunparse((
+            parsed_url.scheme,
+            parsed_url.netloc,
+            parsed_url.path,
+            parsed_url.params,
+            updated_query,
+            parsed_url.fragment
+        ))
+
+        return updated_url
+
     # function to get all the realevent data from the website and save it in the data varible
     async def search(self, location):
         # make the URL
@@ -54,7 +80,7 @@ class Scraper:
 
         # start making the Scraping from the file html
         while True:
-            print(URL)
+            # print(URL)
             # try to get the file html of the page website
             try:
                 text_BS = await self.get_html_file(URL)
@@ -99,8 +125,9 @@ class Scraper:
                     new_location_dictionary['type'] = (((child.find('div' , class_ = 'text-sm uppercase font-semibold tracking-wide relative z-10 mb-2 w-90 text-black-400 block')).text).split())[0]
 
                     # define the img of the location
-                    new_location_dictionary['img'] = (child.find('img')).get('src')
-                    
+                    url_img = (child.find('img')).get('src')
+                    new_location_dictionary['img'] = await self.resize_image_url(url_img, 1920, 1920)
+                                        
                     # define the data of the location
                     new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' )
 
@@ -117,8 +144,9 @@ class Scraper:
                     self.data.append(new_location_dictionary)
 
                 except AttributeError as e:
+                    break;
                     pass    
-
+            
             # self.time_to_wait *= 100
             # get the new Page to search in
             try:

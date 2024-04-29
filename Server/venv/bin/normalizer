@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/ramezna/Downloads/college/2023-2024/10051 פרויקט גמר בהנדסת תוכנה/Website-Compass-Curious/Server/venv/bin/python3" "$0" "$@"
+'''exec' "/home/ramezna/Downloads/college/2023-2024/10051 פרויקט גמר בהנדסת תוכנה/Website-Compass-Curious/Server/venv/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

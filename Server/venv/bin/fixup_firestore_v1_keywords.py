@@ -1,4 +1,4 @@
-#!/home/ramezna/Downloads/college/2023-2024/10051 פרויקט גמר בהנדסת תוכנה/Website-Compass-Curious/Server/venv/bin/python3
+#!/home/ramezna/Downloads/college/2023-2024/10051 פרויקט גמר בהנדסת תוכנה/Website-Compass-Curious/Server/venv/bin/python
 # -*- coding: utf-8 -*-
 # Copyright 2023 Google LLC
 #
