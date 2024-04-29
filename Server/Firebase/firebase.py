@@ -4,9 +4,15 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter,Or
 import os
+import sys
 
-# Get the absolute path to the 'key.json' file
-key_path = os.path.abspath("key.json")
+# adding Scraper folder to the system path
+sys.path.insert(0, '/home/ramezna/Downloads/college/2023-2024/10051 פרויקט גמר בהנדסת תוכנה/Website-Compass-Curious/Server/Scrapping')
+# import the file Scraper 
+from search import Scraper
+
+# Get the Relative path to the 'key.json' file
+key_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'key.json'))
 
 # get the private key
 cred = credentials.Certificate(key_path)
@@ -18,26 +24,30 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # function that help me to add content to firestore
-def add_content_to_firestore(collection_name , data):
-    doc_ref = db.collection(collection_name).document()
-    doc_ref.set(data)
+async def add_content_to_firestore(collection_name , list_of_data):
+    for data in list_of_data:
+        doc_ref = db.collection(collection_name).document()
+        doc_ref.set(data)
 
 # function that help me to read content from firestore
-def read_content_from_firestore(collection_name):
-    
+async def read_content_from_firestore(collection_name):
     # get the collection by using the name of the collection
     docs = (
         db.collection(collection_name)
         .stream()
     )
 
-    # check if the docs is empty if is we make the search using the scrapper :) DO IT
+    # check if the docs is empty if is we make the search using the scrapper :) 
 
     if not any(docs):
         # make scrapping to get the data 
-
+        search_for_new_data = Scraper()
+        # check if the location is valid TODO
+        await search_for_new_data.search(collection_name)
+        # save the data on the firestore and then called the function read_content_from_firestore 
+        await add_content_to_firestore(collection_name , search_for_new_data.data)
         # return the steps and get the data from the firestore
-        return read_content_from_firestore(collection_name)
+        return await read_content_from_firestore(collection_name)
 
     # init varaible that we saved in the data that we recived
     location_list = []
@@ -61,19 +71,26 @@ def get_spesific_content_filtered_by_type_from_firestore(collection_name , type)
 
     docs = query.stream()
 
-     # get the data from the fireStore and add it to the location_list
+    # get the data from the fireStore and add it to the location_list
     for doc in docs:
         location_list.append( doc.to_dict() )
 
     return location_list    
 
 
-# function that help me to update content in the firebase if i need 
-# function that help me to delete content in the firebase if i need 
+# function that help me to update content in the firebase if i need TODO
+# function that help me to delete content in the firebase if i need TODO
 
 # some function to check the code test the code 
 # add_content_to_firestore( 'User',{'name':'rame' , 'age' : 26} )
 # print(read_content_from_firestore('User'))
+# print(await read_content_from_firestore('tel aviv'))
 
 # print(get_spesific_content_filtered_by_type_from_firestore('User' , 24))
+import asyncio
 
+async def main():
+    print(await read_content_from_firestore('tel aviv'))
+
+if __name__ == "__main__":
+    asyncio.run(main())
