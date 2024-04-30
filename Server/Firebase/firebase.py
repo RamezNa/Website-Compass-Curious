@@ -29,8 +29,8 @@ async def add_content_to_firestore(collection_name , list_of_data):
         doc_ref = db.collection(collection_name).document()
         doc_ref.set(data)
 
-# function that help me to read content from firestore
-async def read_content_from_firestore(collection_name):
+#function that check if the collection is in the firestore
+async def is_in_firestore(collection_name):
     # get the collection by using the name of the collection
     docs = (
         db.collection(collection_name)
@@ -38,16 +38,23 @@ async def read_content_from_firestore(collection_name):
     )
 
     # check if the docs is empty if is we make the search using the scrapper :) 
-
     if not any(docs):
         # make scrapping to get the data 
         search_for_new_data = Scraper()
-        # check if the location is valid TODO
+        
         await search_for_new_data.search(collection_name)
         # save the data on the firestore and then called the function read_content_from_firestore 
         await add_content_to_firestore(collection_name , search_for_new_data.data)
         # return the steps and get the data from the firestore
-        return await read_content_from_firestore(collection_name)
+        return True
+
+# function that help me to read content from firestore
+async def read_content_from_firestore(collection_name):
+    # get the collection by using the name of the collection
+    docs = (
+        db.collection(collection_name)
+        .stream()
+    )
 
     # init varaible that we saved in the data that we recived
     location_list = []
