@@ -45,8 +45,7 @@ async def is_in_firestore(collection_name):
         await search_for_new_data.search(collection_name)
         # save the data on the firestore and then called the function read_content_from_firestore 
         await add_content_to_firestore(collection_name , search_for_new_data.data)
-        # return the steps and get the data from the firestore
-        return True
+
 
 # function that help me to read content from firestore
 async def read_content_from_firestore(collection_name):
