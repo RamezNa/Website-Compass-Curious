@@ -71,7 +71,10 @@ class Scraper:
         return updated_url
 
     # function to get all the realevent data from the website and save it in the data varible
-    async def search(self, location):
+    async def search(self, location, num_days = -1, attractions = None):
+        # variable to help me to count the location that i have 
+        counter_location = 0
+
         # make the URL
         URL = "https://www.lonelyplanet.com/search?places%5Bquery%5D=" + location + "&places%5BsortBy%5D=pois"        
         
@@ -80,13 +83,13 @@ class Scraper:
 
         # start making the Scraping from the file html
         while True:
-            # print(URL)
+ 
             # try to get the file html of the page website
             try:
                 text_BS = await self.get_html_file(URL)
 
                 list_of_locations = (text_BS.find('section' , class_ = 'relative my-12 md:mt-20 container lg:flex lg:justify-between')).div.ul
-            # print(list_of_locations)
+
             # if there any problem with the file html try another time with time load big from than previuas
             except AttributeError as e:
                 faild_connect_to_fetch_html += 1
@@ -100,21 +103,27 @@ class Scraper:
 
                     self.URL = URL
 
-                    break
+                    return counter_location
 
                 continue
+
             # return the value to the default
             if faild_connect_to_fetch_html != 0:
                 self.time_to_wait -= (faild_connect_to_fetch_html * 1000)
                 faild_connect_to_fetch_html = 0
 
-            # self.time_to_wait *= (1/100)
             # for the list of the child search on the realvent data and saveit
             for child in  list_of_locations.contents:
                 
                 # try to fetch the data if there is any problem skip this child
                 try:
+                    # get the attractions from the website to make filter to answer 
+                    type_of_location = (((child.find('div' , class_ = 'text-sm uppercase font-semibold tracking-wide relative z-10 mb-2 w-90 text-black-400 block')).text).split())[0]
                     
+                    if attractions:
+                        if type_of_location != attractions:
+                            continue
+                        
                     # make new dictionary
                     new_location_dictionary = {}
 
@@ -122,7 +131,7 @@ class Scraper:
                     new_location_dictionary['name'] = (child.find('a')).text
 
                     # define the type of the location
-                    new_location_dictionary['type'] = (((child.find('div' , class_ = 'text-sm uppercase font-semibold tracking-wide relative z-10 mb-2 w-90 text-black-400 block')).text).split())[0]
+                    new_location_dictionary['type'] = type_of_location
 
                     # define the img of the location
                     url_img = (child.find('img')).get('src')
@@ -144,13 +153,14 @@ class Scraper:
 
 
                     self.data.append(new_location_dictionary)
+                    counter_location += 1
+                    
+                    if counter_location == num_days:
+                        return num_days
 
                 except AttributeError as e:
-                    break;
+                    return counter_location
                       
-            # TODO Remove the break
-            break;
-            # self.time_to_wait *= 100
             # get the new Page to search in
             try:
 
@@ -160,10 +170,10 @@ class Scraper:
 
                     self.is_finished = True
                     self.URL = ''
-                    break
+                    return counter_location
 
             except AttributeError as e:
-                    break  
+                    return counter_location  
 
     # function that get the full data about location
     async def get_full_data(self, URL):
