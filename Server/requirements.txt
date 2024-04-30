@@ -25,6 +25,7 @@ google-resumable-media==2.7.0
 googleapis-common-protos==1.62.0
 grpcio==1.62.0
 grpcio-status==1.62.0
+h11==0.14.0
 httplib2==0.22.0
 idna==3.6
 importlib-metadata==7.0.1
@@ -54,6 +55,7 @@ typing_extensions==4.10.0
 unicorn==2.0.1.post1
 uritemplate==4.1.1
 urllib3==1.26.18
+uvicorn==0.29.0
 w3lib==2.1.2
 websockets==10.4
 Werkzeug==3.0.1
