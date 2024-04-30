@@ -1,0 +1,6 @@
+# Start the SSH agent
+eval "$(ssh-agent -s)"
+
+# Add your SSH key to the agent
+ssh-add ../FinalKey
+
