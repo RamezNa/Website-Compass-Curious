@@ -1,16 +1,17 @@
 from flask import Flask, jsonify, request
 from Firebase.firebase import *
 import random
+import asyncio
 
 app = Flask(__name__)
 
 # Route to get a data of location
 @app.route('/suggestion_by_day/<string:location>/<int:day>', methods=['GET'])
-def get_suggestion(location , day):
+async def get_suggestion(location , day):
     # check if the location is exist
-    is_in_firestore(location)
+    await is_in_firestore(location)
     # get the data 
-    data = read_content_from_firestore ( location )
+    data = await read_content_from_firestore ( location )
     # variable that help me to save the result
     result = []
     # variable that help me to save the indices that chossen before
@@ -30,4 +31,6 @@ def get_suggestion(location , day):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host='0.0.0.0', port=8000)
+    # app.run(debug=True) 
