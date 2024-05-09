@@ -1,6 +1,7 @@
 // import images
 import logo_img from './Images/Logo.jpeg'
 import user_offline from './Images/User_Offline.png'
+import './navBar.css'
 
 
 // make a Navbar Html
@@ -10,7 +11,7 @@ function NavBar(){
         
         <ul className='container_nav_bar'>
             <li>
-                <img src={logo_img} alt="Logo" />
+                <img className='logo' src={logo_img} alt="Logo" />
             </li>
             <li>
                 <a className="href_text" >Main</a>
