@@ -1,14 +1,29 @@
 // import images
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import logo_img from './Images/Logo.jpeg'
-import user_offline from './Images/User_Offline.png'
+import user_white_offline from './Images/User_White_Offline.png'
+import user_green_offline from './Images/User_Green_Offline.png'
 import './navBar.css'
 
 // make a Navbar Html
 function NavBar(){
+
+    const [isHovered, setIsHovered] = useState(false);
+
     const navigate = useNavigate();
+
+    // Function to handle mouse enter event
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    // Function to handle mouse leave event
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     // function to handle if the trend in the same page or not
     const scrollToSection = (event) => {
@@ -17,18 +32,14 @@ function NavBar(){
         const targetElement = document.getElementById(targetId)
     
         if (targetElement) {
-        console.log("we are in the Wring side")
           event.preventDefault(); 
           window.scrollTo({
             top: targetElement.offsetTop,
             behavior: 'smooth' 
           })
         }else{
-            console.log("we are in the right side")
-            
             setTimeout(() => {
-                navigate('/');
-                
+                navigate('/'); 
                 setTimeout(() => {
                     const targetElement1 = document.getElementById(targetId)
                     window.scrollTo({
@@ -56,7 +67,7 @@ function NavBar(){
             </li>
             <li >
                 <Link to="/Login" >
-                    <img className='login_img' src={user_offline} alt="Login" />
+                    <img className='login_img' src={ !isHovered ? user_white_offline : user_green_offline } alt="Login" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
                 </Link>
             </li>
         </ul>    

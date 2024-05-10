@@ -1,6 +1,6 @@
 .nav_bar{
-   width: 80%;
-   height: 5em;
+   max-width: 80vw;
+   min-height: 5rem;
    margin-left: 10%; 
    background-color: #1f4037cc ;
    border-radius: 0px 0px 65px 65px;
@@ -9,32 +9,32 @@
 .nav_bar .container_nav_bar{
     display: flex;
     flex-direction: row;
-    /* align-content: space-between;
-    align-items: center; */
-    font-size: 4em;
+    /* align-content: space-between; */
+    /* align-items: center;  */
+    font-size: 4rem;
     color: #ffffff;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
+    padding: 0;
 }
 
-.nav_bar .container_nav_bar li:first-child{
-    margin-left: 5%;
-}
 
 .nav_bar .container_nav_bar li{
     display: initial;
-    padding-right: 8.5%;
+    padding-right: 5rem;
+    padding-left: 5rem;
     border-right: 3px solid #ffffff;
-    height: 100%;
-    transition: 1s;
+    height: 5rem;
+    transition: .5s;
 }
 
 .nav_bar .container_nav_bar li:last-child{
    border-right: none;
 }
-
+/* TODO Repare this to make on the element and not on the li and repaire the shadow */
 .nav_bar .container_nav_bar li:hover{
     cursor: pointer;
+    scale: 1.05;
 }
 
 .nav_bar .container_nav_bar li img{
@@ -42,12 +42,12 @@
 }
 
 .nav_bar .container_nav_bar li .logo_img, .nav_bar .container_nav_bar li .login_img{
-    border-radius: 100%;
+    border-radius: 50%;
     padding-top: 0.1em;
 }
 
 .nav_bar .container_nav_bar li .logo_img:hover, .nav_bar .container_nav_bar li .login_img:hover{
-    box-shadow: 3px 3px 5px #0000004f; 
+    box-shadow: 2px 2px 8px #00000071; 
 }
 
 .nav_bar .container_nav_bar li .href_text{
@@ -57,5 +57,81 @@
 
 .nav_bar .container_nav_bar li .href_text:hover{
     color: #2ECC71;
-    text-shadow: 3px 3px 5px #0000004f;   
+    text-shadow: 2px 2px 8px #00000071;   
+}
+
+@media (max-width: 1260px) {
+    :root{
+        font-size: 14px;
+    }
+    
+}
+
+@media (max-width: 1160px) {
+    :root{
+        font-size: 12px;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    :root{
+        font-size: 10px;
+    }
+    
+}
+
+@media (max-width: 850px) {
+    :root{
+        font-size: 8px;
+    }
+    
+}
+
+/* phone resolution desine */
+@media (max-width: 700px) {
+    :root{
+        font-size: 7px;
+    }
+
+    .nav_bar{
+        max-width: 45vw;
+        min-height: 100vh; 
+        /* background-color: #1f4037cc ; */
+        border-radius: 0px 10px 10px 0px;
+        margin-left: 0;
+    }
+
+    .nav_bar .container_nav_bar{
+        display: flex;
+        flex-direction: column;
+        /* align-content: space-between; */
+        /* align-items: center;  */
+        font-size: 7rem;
+        color: #ffffff;
+        justify-content: center;
+        padding-top: 10rem;
+        width: 80vw;
+        
+    }
+
+    .nav_bar .container_nav_bar li{
+
+        padding-right: 0rem;
+        padding-left: 8rem;
+        border-right:none;
+        border-top: 3px solid #ffffff;
+        height: 10rem;
+        padding-top: 2rem;
+        
+    }
+
+    .nav_bar .container_nav_bar li:first-child{
+        padding-bottom: 3rem;
+    }
+
+    .nav_bar .container_nav_bar li img{
+        width: 9rem; 
+    }
+
 }
