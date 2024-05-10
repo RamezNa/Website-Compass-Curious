@@ -1,6 +1,6 @@
 .nav_bar{
    width: 80%;
-   height: 75px;
+   height: 5em;
    margin-left: 10%; 
    background-color: #1f4037cc ;
    border-radius: 0px 0px 65px 65px;
@@ -9,9 +9,9 @@
 .nav_bar .container_nav_bar{
     display: flex;
     flex-direction: row;
-    align-content: space-between;
-    align-items: center;
-    font-size: 56px;
+    /* align-content: space-between;
+    align-items: center; */
+    font-size: 4em;
     color: #ffffff;
     justify-content: space-between;
     height: 100%;
@@ -23,7 +23,7 @@
 
 .nav_bar .container_nav_bar li{
     display: initial;
-    padding-right: 10%;
+    padding-right: 8.5%;
     border-right: 3px solid #ffffff;
     height: 100%;
     transition: 1s;
@@ -38,11 +38,21 @@
 }
 
 .nav_bar .container_nav_bar li img{
-    width: 55px; 
+    width: 1em; 
 }
 
-.nav_bar .container_nav_bar li .logo{
+.nav_bar .container_nav_bar li .logo_img, .nav_bar .container_nav_bar li .login_img{
     border-radius: 100%;
+    padding-top: 0.1em;
+}
+
+.nav_bar .container_nav_bar li .logo_img:hover, .nav_bar .container_nav_bar li .login_img:hover{
+    box-shadow: 3px 3px 5px #0000004f; 
+}
+
+.nav_bar .container_nav_bar li .href_text{
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .nav_bar .container_nav_bar li .href_text:hover{
