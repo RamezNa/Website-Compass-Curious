@@ -4,14 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import logo_img from './Images/Logo.jpeg'
+
 import user_white_offline from './Images/User_White_Offline.png'
 import user_green_offline from './Images/User_Green_Offline.png'
+
+import login_boy from './Images/User_Login_boy.png'
+import login_girl from './Images/User_Login_girl.png'
+
 import './navBar.css'
 
 // make a Navbar Html
 function NavBar(){
 
     const [isHovered, setIsHovered] = useState(false);
+    
 
     const navigate = useNavigate();
 
@@ -24,6 +30,14 @@ function NavBar(){
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
+
+
+    const [isNavBarClicked, setIsNavBarClicked] = useState(false);
+
+    const handleNavBarIconClicked = () => {
+        setIsNavBarClicked(!isNavBarClicked)
+    }
+
 
     // function to handle if the trend in the same page or not
     const scrollToSection = (event) => {
@@ -52,7 +66,12 @@ function NavBar(){
       };
 
     return <>
-    <nav className="nav_bar">    
+    <div className='show_unshow_navbar' onClick={handleNavBarIconClicked}>
+        <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
+        <div className={!isNavBarClicked ? 'line' : 'line clicked'}></div>
+        <div className={!isNavBarClicked ? 'line' : 'notLine'}></div>
+    </div>  
+    <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}>  
         <ul className='container_nav_bar'>
             <li>
                 <Link to="/" >

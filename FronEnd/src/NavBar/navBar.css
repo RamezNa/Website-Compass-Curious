@@ -4,13 +4,12 @@
    margin-left: 10%; 
    background-color: #1f4037cc ;
    border-radius: 0px 0px 65px 65px;
+
 }
 
 .nav_bar .container_nav_bar{
     display: flex;
     flex-direction: row;
-    /* align-content: space-between; */
-    /* align-items: center;  */
     font-size: 4rem;
     color: #ffffff;
     justify-content: center;
@@ -25,20 +24,20 @@
     padding-left: 5rem;
     border-right: 3px solid #ffffff;
     height: 5rem;
-    transition: .5s;
 }
 
 .nav_bar .container_nav_bar li:last-child{
    border-right: none;
 }
-/* TODO Repare this to make on the element and not on the li and repaire the shadow */
-.nav_bar .container_nav_bar li:hover{
+/* TODO Repare the animation of the navbar */
+.nav_bar .container_nav_bar li img:hover, .nav_bar .container_nav_bar li .href_text:hover{
     cursor: pointer;
     scale: 1.05;
 }
 
 .nav_bar .container_nav_bar li img{
     width: 1em; 
+    transition: .5s;
 }
 
 .nav_bar .container_nav_bar li .logo_img, .nav_bar .container_nav_bar li .login_img{
@@ -53,6 +52,7 @@
 .nav_bar .container_nav_bar li .href_text{
     color: #ffffff;
     text-decoration: none;
+    transition: .5s;
 }
 
 .nav_bar .container_nav_bar li .href_text:hover{
@@ -133,5 +133,60 @@
     .nav_bar .container_nav_bar li img{
         width: 9rem; 
     }
+
+    .hiden_nav_bar{
+        opacity: 0;
+        transform: translateX(-20rem);
+        display: none;
+    }
+
+    .show_unshow_navbar{
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.75);
+        width: 8rem;
+        height: 8rem;
+        margin-top: 1rem ;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .show_unshow_navbar .clicked:first-child{
+        transform: rotate(45deg) translateY(.75rem) translateX(1rem)
+        
+    }
+    
+    .show_unshow_navbar .clicked{
+        transform: rotate(-45deg);
+    }
+    
+    .show_unshow_navbar .line{
+        width: 4.5rem;
+        height: .6rem;
+        background-color: #1f4037cc;
+        margin-bottom: 0.8rem ;
+        transition: .5s;
+    
+    }
+    
+    .show_unshow_navbar .line:last-child{
+        margin-bottom:0rem;
+    }
+
+    /* .unhiden_nav_bar{
+
+    }
+
+    .hiden_show_unshow_navbar{
+
+    }
+
+    .unhiden_show_unshow_navbar{
+        
+    } */
+    
 
 }
