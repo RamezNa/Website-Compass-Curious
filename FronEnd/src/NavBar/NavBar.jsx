@@ -11,26 +11,14 @@ import user_green_offline from './Images/User_Green_Offline.png'
 import login_boy from './Images/User_Login_boy.png'
 import login_girl from './Images/User_Login_girl.png'
 
-import './navBar.css'
+import Img_Hover from '../componant/Img_Hover'
 
+import './navBar.css'
+// TODO make the img of the login to change between the girl or boy or changed between login or not IMPORTANT
 // make a Navbar Html
 function NavBar(){
 
-    const [isHovered, setIsHovered] = useState(false);
-    
-
     const navigate = useNavigate();
-
-    // Function to handle mouse enter event
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    // Function to handle mouse leave event
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
 
     const [isNavBarClicked, setIsNavBarClicked] = useState(false);
 
@@ -66,12 +54,14 @@ function NavBar(){
       };
 
     return <>
-    <div className='show_unshow_navbar' onClick={handleNavBarIconClicked}>
+    <div className={!isNavBarClicked ? 'show_unshow_navbar' : 'show_unshow_navbar clicked_btn'} onClick={handleNavBarIconClicked}>
         <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
         <div className={!isNavBarClicked ? 'line' : 'line clicked'}></div>
         <div className={!isNavBarClicked ? 'line' : 'notLine'}></div>
     </div>  
-    <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}>  
+    <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}> 
+        {/* TODO on click on the small bage to the some of the "<li>" close the navbar */}
+        {/* TODO make the main clicked moved to the main search  */}
         <ul className='container_nav_bar'>
             <li>
                 <Link to="/" >
@@ -86,7 +76,7 @@ function NavBar(){
             </li>
             <li >
                 <Link to="/Login" >
-                    <img className='login_img' src={ !isHovered ? user_white_offline : user_green_offline } alt="Login" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
+                    <Img_Hover url_hovered={user_green_offline} url_unHovered={user_white_offline} class_name={'login_img'} alt_name={"Login"} />
                 </Link>
             </li>
         </ul>    
