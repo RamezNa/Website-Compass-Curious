@@ -1,0 +1,215 @@
+.container_MP{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+.container_MP .search{
+    background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_1.jpg');
+    background-position: center;
+    background-size: cover;
+    min-width:100vw;
+    min-height: 80vh;
+    padding-top: 9rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* .container_MP .search .content{
+    
+} */
+
+.container_MP .search .content:first-child{
+    padding-bottom: 2rem;
+}
+
+.container_MP .search .content h1{
+    font-size: 4.6rem;
+}
+
+.container_MP .search .content h2{
+    font-size: 2.5rem;
+}
+
+.container_MP .search .content form{
+    margin-top: 3rem;
+    padding-bottom: 5rem;
+
+}
+
+.container_MP .search .content form .container_submit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container_MP .search .content form .container_submit:first-child{
+    margin-bottom: 2rem;
+}
+
+.container_MP .search .content form .container_submit input{
+    height: 4rem;
+    border-radius: 7rem;
+    background-color: #1f4037cc;
+    border: none;
+    font-family: inherit;
+    font-size: 2.5rem;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    cursor: auto;
+    
+}
+
+/* hide the default arrow from the website */
+/* Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+
+.container_MP .search .content form .container_submit input:focus{
+    outline: none;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.container_MP .search .content form .container_submit .location_input{
+    width: 36rem;
+    padding-left: 5rem;
+}
+
+.container_MP .search .content form .container_submit .day_input{
+    width: 26rem;
+    margin-right: 3rem;
+}
+
+.container_MP .search .content form .container_submit .icon_search{
+    width: 2rem;
+    height: 2rem;
+    transform: translateX(3.5rem);
+    opacity: 0.6;
+}
+
+.container_MP .search .content form .container_submit .btn_submit{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.container_MP .search .content form .container_submit .btn_submit .icon_go{
+    width: 5rem;
+    height: 5rem;
+    transition: .3s linear;
+    cursor: pointer;
+}
+
+.container_MP .search .content form .container_submit .icon_go:hover{
+    transform: scale(1.1);
+}
+
+.container_MP .trend{
+    background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_2.jpg');
+    background-position: center;
+    background-size: cover;
+    width:100vw;
+    min-height: 100vh;
+    padding-top: 7rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container_MP .trend .title{
+    font-weight: bold;
+    font-size: 4.2rem;
+    padding-bottom: 1.5rem;
+
+}
+
+.container_MP .trend .subTitle{
+    font-size: 2.3rem;
+    padding-bottom: 6rem;
+}
+
+.container_MP .trend .container_trend{
+    display: flex;
+    
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80vw;
+    padding-bottom: 3rem;
+    z-index: 0;
+}
+
+.container_MP .trend .left{
+    flex-direction: row;
+}
+
+.container_MP .trend .right{
+    flex-direction: row-reverse;
+}
+
+.container_MP .trend .container_trend .container_img_and_number{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_number{
+    width: 5rem;
+    height: 5rem;
+    background-color: rgba(255, 255, 255,0.9);
+    border-radius: 15rem;
+    text-align: center;
+    transform: translateX(-4.5rem) translateY(0.5rem);
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_number .number{
+    color: #212121;
+    font-size: 6rem;
+    font-weight: 500;
+    transform: translateY(-3rem)  translateX(-1.2rem);
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_img{
+    display: flex;
+    flex-direction: column;
+    padding-right: 3rem;
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_img .img_location{
+    width: 20rem;
+    border-radius: 2rem 2rem 0rem 0rem;
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_img .name_location{
+    font-size: 3.5rem;
+    color: #2ECC71;
+    font-weight: 500;
+    transform: translateY(-2rem);
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_img .number_days{
+    font-size: 2.5rem;
+    font-weight: 500;
+    transform: translateY(-2.6rem) translateX(4.5rem);
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
+}
+
+.container_MP .trend .container_trend .description{
+    font-size: 2rem;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* make respose and on the small phone make the height is smaller than 90vh to something 60vh */
