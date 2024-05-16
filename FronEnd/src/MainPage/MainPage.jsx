@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './mainPage.css'
 
 import Img_Hover from '../componant/Img_Hover'
+import Box_Img_Description from './componant/Box_Img_Desciption';
 
 import sumbit_answer_w from './Images/lets-go_w.png'
 import sumbit_answer_g from './Images/lets-go_g.png'
@@ -41,6 +42,7 @@ function MainPage(){
     }
 
     const handleSubmit = (event) => {
+        // TODO check that the location is valid :)
         event.preventDefault()
         navigate('/Suggestion')
     }
@@ -78,40 +80,9 @@ function MainPage(){
                 <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
                 {/* TODO Make map to recived the data */}
                 {/* TODO make componant */}
-                <div className='container_trend left'>
-                    <div className='container_img_and_number'>
-                        <div className="container_number">
-                            <p className='number'>1</p>
-                        </div>
-                        <div className="container_img">
-                            <img className='img_location' src="https://cdn.britannica.com/92/177992-050-AED0DC28/Dome-of-the-Rock-Temple-Mount-Jerusalem.jpg" alt="" />
-                            <h1 className='name_location'>Jerusalem</h1>
-                            <h2 className='number_days'>5 Days</h2>
-                        </div>
-
-                    </div>
-                    <p className="description">
-                        is the most populous city in the Gush Dan metropolitan area of Israel.
-                    </p>
-                </div>
-                <div className='container_trend right'>
-                    <div className='container_img_and_number'>
-                        <div className="container_number">
-                            <p className='number'>2</p>
-                        </div>
-                        <div className="container_img">
-                            <img className='img_location' src="https://cdn.britannica.com/92/177992-050-AED0DC28/Dome-of-the-Rock-Temple-Mount-Jerusalem.jpg" alt="" />
-                            <h1 className='name_location'>Tel Aviv</h1>
-                            <h2 className='number_days'>5 Days</h2>
-                        </div>
-
-                    </div>
-                    <p className="description">
-                        is the most populous city in the Gush Dan metropolitan area of Israel.
-                    </p>
-                </div>
+                <Box_Img_Description class_={'left'} number ={1} number_of_days={5}  name_location={'Jerusalem'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
+                <Box_Img_Description class_={'right'} number ={2} number_of_days={10}  name_location={'Tel Aviv'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
             </div>   
-            
         </div>
         </>
     )
