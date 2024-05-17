@@ -5,7 +5,7 @@
     background-color: #1f4037cc ;
     border-radius: 0px 0px 65px 65px;
     position:  fixed  ;
-    z-index: 100;
+    z-index: 3;
     
 }
 
@@ -162,7 +162,7 @@
         align-items: center;
         cursor: pointer;
         position: fixed;
-        z-index: 2;
+        z-index: 4;
     }
     
     .show_unshow_navbar .clicked:first-child{
