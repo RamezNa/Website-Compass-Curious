@@ -1,5 +1,5 @@
 
-// TODO when click on the componant make to me the suggestion with the number_of_days and name_location :)
+// TODO when click on the component make to me the suggestion with the number_of_days and name_location :)
 function Box_Img_Description({class_, number ,number_of_days, name_location, description }){
 
     return(
