@@ -1,0 +1,127 @@
+.login{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: row;
+}
+
+.login .container_left{
+    width: 67vw;
+    height: 100vh;
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('./Images/bg.jpg');
+    background-position: right;
+    background-size: 80rem;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    
+}
+
+.login .container_left .title{
+    font-size: 3.5rem;
+    margin-top: auto;
+    margin-bottom: 2rem;
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+.login .container_left .subTitle{
+    font-size: 2.8rem;
+    margin-bottom: auto;
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+
+.login .container_right{
+    width: 33vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1F4037;
+}
+
+.login .container_right .title{
+    font-size: 2.5rem; 
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+/* TODO Fix the % and replace with something else :) */
+.login .container_right .description{
+    width: 64%;
+    margin-bottom: 2rem;
+}
+
+.login .container_right .description .clickable{
+    color: #2ECC71;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.login .container_right .description .clickable:hover{
+    /* font-size: 1.2rem; */
+    font-weight: 500;
+    text-shadow: .1rem .1rem .15rem rgba(0, 0, 0, 0.1);
+
+}
+
+.login .container_right .login_form{
+    display: flex;
+    flex-direction: column;
+}
+
+.login .container_right .login_form .label_for_box{
+    transform: translateX(1rem);
+}
+
+.login .container_right .login_form .box_input{
+    width: 18rem;
+    background-color: rgba(46, 204, 113,0.75);
+    border: none;
+    color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    transition: .5s; 
+}
+
+.login .container_right .login_form .box_input:hover{
+    transform: scale(1.05);
+    box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+.login .container_right .login_form .box_input:focus{
+    outline: none;
+    box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+
+
+.login .container_right .login_form button{
+    width: 20rem;
+    background-color: rgba(46, 204, 113,0.75);
+    border: none;
+    color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    margin-top: .7rem;
+    font-weight: 500;
+    transition: .5s;
+}
+
+.login .container_right .login_form button:hover{
+    transform: scale(1.05);
+    box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+.login .container_right .last{
+    margin-bottom: auto;
+}
+
+/* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
