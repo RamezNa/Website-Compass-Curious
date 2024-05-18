@@ -1,0 +1,105 @@
+.history{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1504598318550-17eba1008a68?q=80&w=1372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    /* background-position: center; */
+    /* background-size: 100vw; */
+    align-items: center;
+}
+
+.history .header{
+    display: flex;
+    flex-direction: row;
+    margin-top: 8rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.history .header .line{
+    width: 26rem;
+    height: .6rem;
+    background-color: #000000cc;
+    transform: translateX(9rem);
+    position: static;
+    border-radius: 0.3rem;
+}
+
+.history .header .title{
+    font-size: 5rem;
+    transform: translateX(-12.5rem);
+    font-weight: 500;
+}
+
+.history .subTitle{
+    font-size: 3rem;
+    text-transform: capitalize;
+    margin-bottom: 4rem;
+}
+
+.history .line{
+    width: 75vw;
+    height: .6rem;
+    background-color: #000000cc;
+    border-radius: 0.3rem;
+}
+
+.history .container_data{
+    width: 85vw;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 4rem;
+    /* justify-content: space-between; */
+}
+
+.history .container_data .data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 6rem;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.history .container_data .data:hover{
+    transform: scale(1.05);
+}
+
+.history .container_data .data:nth-child(3n){
+    margin-right: 0rem;
+}
+
+.history .container_data .data .img{
+    width:20rem;
+    border-radius: 2rem 2rem 0rem 0rem;
+    box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, 0.4);
+}
+
+.history .container_data .data .aligment{
+    align-self: center;
+    text-align: end;
+}
+
+.history .container_data .data .name_location{
+    font-weight: 500;
+    font-size: 3.5rem;
+    color: #2ECC71;
+    font-weight: 500;
+    transform: translateY(-2.5rem);
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
+    
+}
+
+.history .container_data .data .num_day{
+    font-size: 2rem;
+    font-weight: 500;
+    transform: translateY(-3rem);
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
+    align-self: self-end;
+}
+
+/* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
