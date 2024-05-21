@@ -1,39 +1,69 @@
-.login{
+.login , .signIn, .forget{
     display: flex;
     width: 100vw;
     height: 100vh;
     flex-direction: row;
 }
 
-.login .container_left{
+
+.login .container_left, .signIn .container_left, .forget .container_left{
     width: 67vw;
     height: 100vh;
-    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('./Images/bg.jpg');
-    background-position: right;
-    background-size: 80rem;
-    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #ffffff;
+    background-repeat: no-repeat;
     
 }
 
-.login .container_left .title{
+.login .container_left{
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: right;
+    background-size: 80rem;
+    
+}
+
+.signIn .container_left{
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: center;
+    background-size: 70rem;
+}
+
+.forget .container_left{
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1504150558240-0b4fd8946624?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: center;
+    background-size: 70rem;
+    text-align: center;
+}
+
+.login .container_left .title, .forget .container_left .title, .signIn .container_left .title {
     font-size: 3.5rem;
     margin-top: auto;
     margin-bottom: 2rem;
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+    text-transform: capitalize;
+}
+
+.login .container_left .subTitle, .forget .container_left .subTitle, .signIn .container_left .subTitle{
+    margin-bottom: auto;
+    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+    text-transform: capitalize;
 }
 
 .login .container_left .subTitle{
     font-size: 2.8rem;
-    margin-bottom: auto;
-    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
+}
+
+.forget .container_left .subTitle{
+    font-size: 2.8rem;
+}
+.signIn .container_left .subTitle{
+    font-size: 2rem;
 }
 
 
-.login .container_right{
+.login .container_right , .forget .container_right ,.signIn .container_right{
     width: 33vw;
     height: 100vh;
     display: flex;
@@ -42,10 +72,10 @@
     color: #1F4037;
 }
 
-.login .container_right .title{
+.login .container_right .title, .forget .container_right .title ,.signIn .container_right .title{
     font-size: 2.5rem; 
     font-weight: 500;
-    margin-top: auto;
+    margin-top: 8rem;
     margin-bottom: 2rem;
 }
 /* TODO Fix the % and replace with something else :) */
@@ -67,16 +97,16 @@
 
 }
 
-.login .container_right .login_form{
+.login .container_right .login_form, .signIn .container_right .signIn_form, .forget .container_right .forget_form{
     display: flex;
     flex-direction: column;
 }
 
-.login .container_right .login_form .label_for_box{
+.login .container_right .login_form .label_for_box, .signIn .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box{
     transform: translateX(1rem);
 }
 
-.login .container_right .login_form .box_input{
+.login .container_right .login_form .box_input, .signIn .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
     width: 18rem;
     background-color: rgba(46, 204, 113,0.75);
     border: none;
@@ -88,19 +118,55 @@
     transition: .5s; 
 }
 
-.login .container_right .login_form .box_input:hover{
+.login .container_right .login_form .box_input:hover, .signIn .container_right .signIn_form .box_input:hover, .forget .container_right .forget_form .box_input:hover{
     transform: scale(1.05);
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
-.login .container_right .login_form .box_input:focus{
+.login .container_right .login_form .box_input:focus, .signIn .container_right .signIn_form .box_input:focus, .forget .container_right .forget_form .box_input:focus{
     outline: none;
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
+.signIn .container_right .signIn_form .title_gender{
+    font-size: 1.5rem;
+    transform: translateX(1rem);
+}
 
+.signIn .container_right .signIn_form .container_gender{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 
-.login .container_right .login_form button{
+.signIn .container_right .signIn_form .container_gender label{
+    color: #1F4037;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.signIn .container_right .signIn_form .container_gender .male, .signIn .container_right .signIn_form .container_gender .female{
+    text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.2);
+}
+
+.signIn .container_right .signIn_form .container_gender .male{
+    color: #284fff;
+}
+
+.signIn .container_right .signIn_form .container_gender .female{
+    color: #f12256;
+}
+
+.signIn .container_right .signIn_form .container_gender label:first-child{
+    margin-right: 2rem;
+}
+
+.signIn .container_right .signIn_form .container_gender label input{
+    opacity: 0;
+}
+
+.login .container_right .login_form button, .signIn .container_right .signIn_form button, .forget .container_right .forget_form button{
     width: 20rem;
     background-color: rgba(46, 204, 113,0.75);
     border: none;
@@ -115,13 +181,10 @@
     transition: .5s;
 }
 
-.login .container_right .login_form button:hover{
+.login .container_right .login_form button:hover, .signIn .container_right .signIn_form button:hover, .forget .container_right .forget_form button:hover{
     transform: scale(1.05);
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
-.login .container_right .last{
-    margin-bottom: auto;
-}
 
 /* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
