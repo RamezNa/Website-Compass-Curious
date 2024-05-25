@@ -171,10 +171,10 @@ input[type='number'] {
 }
 
 .container_MP .trend .container_trend .container_img_and_number .container_number .number{
-    color: #212121;
+    color: #0f0f0f;
     font-size: 6rem;
     font-weight: 500;
-    transform: translateY(-3rem)  translateX(-1.2rem);
+    transform: translateY(-3rem)  translateX(-0.4rem);
 }
 
 .container_MP .trend .container_trend .container_img_and_number .container_img{
@@ -205,7 +205,6 @@ input[type='number'] {
     font-size: 2.5rem;
     font-weight: 500;
     transform: translateY(-2.6rem);
-    text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
 }
 
 .container_MP .trend .container_trend .description{

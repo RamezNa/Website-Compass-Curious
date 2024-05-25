@@ -11,8 +11,10 @@ function Box_Img_Description({class_, number ,number_of_days, name_location, des
                 </div>
                 <div className="container_img">
                     <img className='img_location' src="https://cdn.britannica.com/92/177992-050-AED0DC28/Dome-of-the-Rock-Temple-Mount-Jerusalem.jpg" alt="" />
-                    <h1 className='name_location'>{name_location}</h1>
-                    <h2 className='number_days'>{number_of_days} Days</h2>
+                    <div className="aligment">
+                        <h1 className='name_location'>{name_location}</h1>
+                        <h2 className='number_days'>{number_of_days} Days</h2>
+                    </div>
                 </div>
 
             </div>

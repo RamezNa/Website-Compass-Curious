@@ -156,7 +156,6 @@
     .nav_bar{
         max-width: 45vw;
         min-height: 100vh; 
-        /* TODO repaire the height to fit to the phone */
         border-radius: 0px 10px 10px 0px;
         margin-left: 0;
         transition: .2s cubic-bezier(1,.96,1,.45);
@@ -241,7 +240,7 @@
         margin-bottom:0rem;
     }
 
-    /* TODO .right and left dont work fix it */
+    
 
 }
 

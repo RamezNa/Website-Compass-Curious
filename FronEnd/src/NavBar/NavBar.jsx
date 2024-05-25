@@ -30,6 +30,9 @@ function NavBar(){
     // function to handle if the trend in the same page or not
     const scrollToSection = (event) => {
 
+        if(isNavBarClicked){
+            handleNavBarIconClicked()
+        }
         const targetId = event.target.getAttribute('href').substring(1) 
         const targetElement = document.getElementById(targetId)
     
@@ -60,16 +63,15 @@ function NavBar(){
         <div className={!isNavBarClicked ? 'line' : 'notLine'}></div>
     </div>  
     <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}> 
-        {/* TODO on click on the small bage to the some of the "<li>" close the navbar */}
-        {/* TODO make the main clicked moved to the main search  */}
         <ul className='container_nav_bar'>
             <li>
                 <Link to="/" >
-                    <img className='logo_img' src={logo_img} alt="Logo" />
+                    <img className='logo_img' src={logo_img} alt="Logo" onClick={handleNavBarIconClicked} />
                 </Link>    
             </li>
             <li>
-                <Link to="/" className="href_text" >Main</Link>
+                {/* <Link to="/" className="href_text" >Main</Link> */}
+                <a className="href_text" href="#Main" onClick={scrollToSection} >Main</a>
             </li>
             <li>
                 <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>

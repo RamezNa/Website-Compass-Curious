@@ -51,7 +51,7 @@ function MainPage(){
     return (
         <>
         <div className='container_MP'>
-            <div className='search'>
+            <div className='search' id='Main'>
                 <div className="content">
                     <h1>Dreaming Of Adventure?</h1>
                     <h2>Let Compass Curious Guide You To Unforgettable Destinations </h2>
@@ -79,7 +79,6 @@ function MainPage(){
                 <h1 className='title'>Inspired By Travelers</h1>
                 <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
                 {/* TODO Make map to recived the data */}
-                {/* TODO make component */}
                 <Box_Img_Description class_={'left'} number ={1} number_of_days={5}  name_location={'Jerusalem'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
                 <Box_Img_Description class_={'right'} number ={2} number_of_days={10}  name_location={'Tel Aviv'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
             </div>   
