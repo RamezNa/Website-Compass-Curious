@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import './mainPage.css'
 
-import Img_Hover from '../componant/Img_Hover'
-import Box_Img_Description from './componant/Box_Img_Desciption';
+import Img_Hover from '../component/Img_Hover'
+import Box_Img_Description from './component/Box_Img_Desciption';
 
 import sumbit_answer_w from './Images/lets-go_w.png'
 import sumbit_answer_g from './Images/lets-go_g.png'
@@ -79,7 +79,7 @@ function MainPage(){
                 <h1 className='title'>Inspired By Travelers</h1>
                 <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
                 {/* TODO Make map to recived the data */}
-                {/* TODO make componant */}
+                {/* TODO make component */}
                 <Box_Img_Description class_={'left'} number ={1} number_of_days={5}  name_location={'Jerusalem'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
                 <Box_Img_Description class_={'right'} number ={2} number_of_days={10}  name_location={'Tel Aviv'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
             </div>   

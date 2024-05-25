@@ -11,19 +11,17 @@
     background-size: cover;
     min-width:100vw;
     min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding-top: 9rem;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
-
-/* .container_MP .search .content{
-    
-} */
 
 .container_MP .search .content:first-child{
     padding-bottom: 2rem;
 }
+
 
 .container_MP .search .content h1{
     font-size: 4.6rem;
@@ -121,11 +119,12 @@ input[type='number'] {
     background-position: center;
     background-size: cover;
     width:100vw;
-    min-height: 100vh;
     padding-top: 7rem;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80vh;
 }
 
 .container_MP .trend .title{
@@ -142,11 +141,10 @@ input[type='number'] {
 
 .container_MP .trend .container_trend{
     display: flex;
-    
     margin-left: auto;
     margin-right: auto;
     max-width: 80vw;
-    padding-bottom: 3rem;
+    margin-bottom: 3rem;
     z-index: 0;
 }
 
@@ -190,7 +188,12 @@ input[type='number'] {
     border-radius: 2rem 2rem 0rem 0rem;
 }
 
-.container_MP .trend .container_trend .container_img_and_number .container_img .name_location{
+.container_MP .trend .container_trend .container_img_and_number .container_img .aligment{
+    align-self: center;
+    text-align: end;
+}
+
+.container_MP .trend .container_trend .container_img_and_number .container_img .aligment .name_location{
     font-size: 3.5rem;
     color: #2ECC71;
     font-weight: 500;
@@ -198,10 +201,10 @@ input[type='number'] {
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
 }
 
-.container_MP .trend .container_trend .container_img_and_number .container_img .number_days{
+.container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
     font-size: 2.5rem;
     font-weight: 500;
-    transform: translateY(-2.6rem) translateX(4.5rem);
+    transform: translateY(-2.6rem);
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.5);
 }
 
@@ -212,4 +215,155 @@ input[type='number'] {
     margin-bottom: auto;
 }
 
-/* make respose and on the small phone make the height is smaller than 90vh to something 60vh */
+/* phone resolution desine */
+@media (max-width:700px){
+
+    .container_MP .search .content h1{
+        font-size: 6.6rem;
+    }
+    
+    .container_MP .search .content h2{
+        font-size: 3rem;
+    }
+
+    .container_MP .search .content form .container_submit .location_input{
+        width: 56rem;
+    }
+
+    .container_MP .search .content form .container_submit .day_input{
+        width: 46rem;
+    }
+
+    .container_MP .trend .container_trend{
+        flex-direction: column;
+        margin-bottom: 10rem;
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .img_location{
+        width: 40vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .name_location{
+        font-size: 6.5rem;
+        transform: translateY(-5rem);
+    }
+    
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
+        font-size: 5.5rem;
+        transform: translateY(-5.6rem);
+    }
+    
+    .container_MP .trend .container_trend .description{
+        font-size: 3rem;
+        width: 50vw;
+    }
+
+}
+
+@media (max-width:650px){
+
+    .container_MP .search .content h1{
+        font-size: 5.6rem;
+    }
+    
+    .container_MP .search .content h2{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width:550px){
+
+    .container_MP .search .content h1{
+        font-size: 5rem;
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .img_location{
+        width: 60vw;
+    }
+
+    .container_MP .trend .container_trend .description{
+        width: 70vw;
+    }
+    
+}
+
+@media (max-width:450px){
+
+    .container_MP .search .content form .container_submit .location_input{
+        width: 46rem;
+    }
+
+    .container_MP .search .content form .container_submit .day_input{
+        width: 36rem;
+    }
+}
+
+@media (max-width:410px){
+
+    .container_MP .search .content h1{
+        font-size: 4rem;
+    }
+    
+    .container_MP .search .content h2{
+        font-size: 2.5rem;
+    }
+
+    .container_MP .search .content form .container_submit .location_input{
+        width: 36rem;
+    }
+
+    .container_MP .search .content form .container_submit .day_input{
+        width: 26rem;
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .name_location{
+        font-size: 5.5rem;
+        transform: translateY(-4rem);
+    }
+    
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
+        font-size: 4.5rem;
+        transform: translateY(-4.6rem);
+    }
+
+}
+
+
+@media (max-width:325px){
+
+    .container_MP .search .content h1{
+        font-size: 3rem;
+    }
+    
+    .container_MP .search .content h2{
+        font-size: 2rem;
+    }
+
+    .container_MP .search .content form .container_submit .location_input{
+        width: 26rem;
+    }
+
+    .container_MP .search .content form .container_submit .day_input{
+        width: 16rem;
+    }
+
+    .container_MP .trend .title{
+        font-size: 3.2rem;
+    }
+
+    .container_MP .trend .subTitle{
+        font-size: 2rem;
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .name_location{
+        font-size: 4.2rem;
+        transform: translateY(-2.5rem);
+    }
+    
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
+        font-size: 3rem;
+        transform: translateY(-2.5rem);
+    }
+}
