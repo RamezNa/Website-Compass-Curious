@@ -11,7 +11,7 @@ import user_green_offline from './Images/User_Green_Offline.png'
 import login_boy from './Images/User_Login_boy.png'
 import login_girl from './Images/User_Login_girl.png'
 
-import Img_Hover from '../componant/Img_Hover'
+import Img_Hover from '../component/Img_Hover'
 
 import './navBar.css'
 // TODO make the img of the login to change between the girl or boy or changed between login or not IMPORTANT
