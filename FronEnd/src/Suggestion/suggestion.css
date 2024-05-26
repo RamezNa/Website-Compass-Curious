@@ -113,6 +113,12 @@
     margin-right: auto;
 }
 
+.suggestion .container_data .container_img_data .loading{
+    max-width: 10rem;
+    max-height: 10rem;
+    margin-right: 4rem;
+}
+
 .suggestion .container_data .container_img_data .img{
     /* max-width: 22rem; */
     height: 20rem;
