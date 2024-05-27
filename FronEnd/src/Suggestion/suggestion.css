@@ -3,11 +3,11 @@
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('./Images/bg.jpg');
-    /* background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg.jpg'); */
     min-height: 100vh;
     background-position: center;
-    background-size: auto;
+    /* background-size: auto; */
     align-items: center;
+    background-size: cover;
     /* justify-content: center; */
     
 
@@ -45,11 +45,6 @@
     
     color: #ffffff;
     
-}
-
-.suggestion .container_data:last-child{
-    margin-bottom: 8rem;
-    /* TODO check why its not worke */
 }
 
 .suggestion .container_data .container_day{
@@ -234,3 +229,72 @@
 
 
 /* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
+@media (max-width: 700px){
+    .suggestion .container_data .container_img_data{
+        max-width: 70vw;
+        /* height: max-content; */
+        flex-direction: column;
+    }
+
+    .suggestion .container_data .container_img_data .img{
+        max-width: 65vw;
+        margin-right: auto;
+        margin-left: auto;
+        height: auto;
+        margin-bottom: 4rem;
+        
+    }
+}
+
+
+@media (max-width: 500px){
+    .suggestion .header h1{
+        font-size: 4rem;
+    }
+    
+    .suggestion .header h2{
+        font-size: 2.5rem;
+    }
+}
+
+
+@media (max-width: 350px){
+    
+    .suggestion .header h1{
+        font-size: 2rem;
+    }
+    
+    .suggestion .header h2{
+        font-size: 1.5rem;
+    }
+
+    .suggestion .container_data .container_img_data .data .title{
+        font-size: 2rem;
+    } 
+    
+    .suggestion .footer .container_conclusion .line{
+        max-width: 30rem;
+        height: 0.4rem;
+        transform: translateY(1.5rem);
+    }
+    
+    .suggestion .footer .container_conclusion .title{
+        font-size: 1.8rem;
+    }
+
+    .suggestion .footer .subTitle{
+        font-size: 1.4rem;
+        width: 70vw;
+    }
+
+    .suggestion .footer .operation{
+        flex-direction: column;
+    }
+    
+    .suggestion .footer .operation .container{
+        margin-right: 0rem;
+        margin-bottom: 3rem;
+        width: 35vw;
+    }
+    
+}

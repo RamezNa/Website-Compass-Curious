@@ -1,14 +1,14 @@
 .login , .signIn, .forget{
     display: flex;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: row;
 }
 
 
 .login .container_left, .signIn .container_left, .forget .container_left{
     width: 67vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,7 +65,7 @@
 
 .login .container_right , .forget .container_right ,.signIn .container_right{
     width: 33vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,10 +78,10 @@
     margin-top: 8rem;
     margin-bottom: 2rem;
 }
-/* TODO Fix the % and replace with something else :) */
+
 .login .container_right .description{
-    width: 64%;
-    margin-bottom: 2rem;
+    width: 18rem;  
+    padding-bottom: 2rem;
 }
 
 .login .container_right .description .clickable{
@@ -129,7 +129,6 @@
 }
 
 .signIn .container_right .signIn_form .title_gender{
-    font-size: 1.5rem;
     transform: translateX(1rem);
 }
 
@@ -142,7 +141,7 @@
 
 .signIn .container_right .signIn_form .container_gender label{
     color: #1F4037;
-    font-size: 2rem;
+    font-size: 1.6rem;
     cursor: pointer;
 }
 
@@ -159,7 +158,9 @@
 }
 
 .signIn .container_right .signIn_form .container_gender label:first-child{
-    margin-right: 2rem;
+    transform: translateX(-0.4rem);
+    margin: 0rem 2rem;
+
 }
 
 .signIn .container_right .signIn_form .container_gender label input{
@@ -188,3 +189,46 @@
 
 
 /* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
+
+@media (max-width: 700px) {
+    .login .container_left, .signIn .container_left, .forget .container_left{
+        width: 0vw;
+        height: 0vh;
+        display: none;
+        
+    }
+    
+    .login .container_left, .signIn .container_left, .forget .container_left{
+        background-image: none;
+        background-position: none;
+        background-size: none;
+        
+    }
+
+    .login .container_right , .forget .container_right ,.signIn .container_right{
+        width: 100vw;
+        min-height: 100vh;
+    }
+    
+    .login .container_right .title, .forget .container_right .title ,.signIn .container_right .title{
+        font-size: 5.5rem; 
+    }
+
+    /* .signIn .container_right .signIn_form .title_gender{
+        transform: translateX(1.3rem);
+    } */
+
+    .signIn .container_right .signIn_form .container_gender{
+        /* justify-content: center; */
+        text-align: left;
+    }
+
+    .signIn .container_right .signIn_form .container_gender label:first-child{
+        transform: translateX(-0.9rem);
+        margin: 0rem 0.9rem;
+    }
+
+    
+    
+    
+}
