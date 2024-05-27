@@ -148,7 +148,7 @@
 }
 
 .suggestion .footer{
-    width: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -182,6 +182,7 @@
     font-size: 2rem;
     width: 80vw;
     margin-bottom: 3rem;
+    line-height: 5rem;
 }
 
 .suggestion .footer .operation{
@@ -255,17 +256,32 @@
     .suggestion .header h2{
         font-size: 2.5rem;
     }
+
+    .suggestion .footer .operation{
+        flex-direction: column;
+    }
+    
+    .suggestion .footer .operation .container{
+        margin-right: 0rem;
+        margin-bottom: 3rem;
+        width: 35vw;
+    }
+
+    .suggestion .footer .subTitle{
+        font-size: 1.8rem;
+        width: 70vw;
+    }
 }
 
 
 @media (max-width: 350px){
     
     .suggestion .header h1{
-        font-size: 2rem;
+        font-size: 3rem;
     }
     
     .suggestion .header h2{
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .suggestion .container_data .container_img_data .data .title{
@@ -284,17 +300,7 @@
 
     .suggestion .footer .subTitle{
         font-size: 1.4rem;
-        width: 70vw;
     }
 
-    .suggestion .footer .operation{
-        flex-direction: column;
-    }
-    
-    .suggestion .footer .operation .container{
-        margin-right: 0rem;
-        margin-bottom: 3rem;
-        width: 35vw;
-    }
     
 }
