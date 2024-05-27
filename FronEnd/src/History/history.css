@@ -48,29 +48,23 @@
 .history .container_data{
     width: 85vw;
     margin-top: 4rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    margin-bottom: 4rem;
-    /* justify-content: space-between; */
+    display: grid;
+    column-gap: 6rem;
+    grid-template-columns: repeat(auto-fit,minmax(18rem , 1fr));
+    
 }
 
 .history .container_data .data{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 6rem;
+    /* margin-right: 6rem; */
     cursor: pointer;
     transition: .5s;
 }
 
 .history .container_data .data:hover{
     transform: scale(1.05);
-}
-
-.history .container_data .data:nth-child(3n){
-    margin-right: 0rem;
 }
 
 .history .container_data .data .img{
