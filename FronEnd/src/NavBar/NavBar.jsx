@@ -78,7 +78,7 @@ function NavBar(){
             </li>
             <li >
                 <Link to="/Login" >
-                    <Img_Hover url_hovered={user_green_offline} url_unHovered={user_white_offline} class_name={'login_img'} alt_name={"Login"} />
+                    <Img_Hover url_hovered={user_green_offline} url_unHovered={user_white_offline} class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
                 </Link>
             </li>
         </ul>    
