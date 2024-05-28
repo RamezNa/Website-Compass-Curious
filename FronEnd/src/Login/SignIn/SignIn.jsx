@@ -1,7 +1,14 @@
 import '../login.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function SignIn(){
+    const navigate = useNavigate()
+    const handleNav = (event) => {
+        event.preventDefault()
+        navigate('/Login')
+    }
+
 
     const[email,setEmail] = useState('')
     const handleEmail = (event) =>{
@@ -18,7 +25,7 @@ function SignIn(){
     const handleOptionChange = (event) => {
       setSelectedOption(event.target.value);
     };
-    // TODo add button to return to login
+
     return(
     <div className="signIn">
         <div className="container_left">
@@ -27,7 +34,10 @@ function SignIn(){
         </div>
         {/* Add icon to return to previous Login page */}
         <div className="container_right">
-            <h3 className="title">Sign In</h3>
+            <div className="container_back">
+                <span className='icon_circule' onClick={handleNav}>⬅</span>
+                <h3 className="title">Sign In</h3>
+            </div>
             {/* TODO Make someting when make Sign In :) onSumbit */}
             <form className="signIn_form" onSubmit="">
                 <label className="label_for_box">Email</label>

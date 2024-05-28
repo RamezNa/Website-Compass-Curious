@@ -72,16 +72,49 @@
     color: #1F4037;
 }
 
-.login .container_right .title, .forget .container_right .title ,.signIn .container_right .title{
-    font-size: 2.5rem; 
-    font-weight: 500;
+
+.signIn .container_right .container_back, .forget .container_right .container_back{
+    display: flex;
+    flex-direction: row;
     margin-top: 8rem;
+    align-items: center;
+}
+
+.signIn .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
+    font-size: 3.5rem;
+    color: #2ECC71dc;
+    transform: translateX(-2rem);
+    margin-bottom: 2rem;
+    transition: .4s;
+    cursor: pointer;
+}
+
+.signIn .container_right .container_back .icon_circule:hover, .forget .container_right .container_back .icon_circule:hover{
+    text-shadow: .1rem .1rem .35rem rgba(0, 0, 0, 0.3);
+}
+
+.login .container_right .title, .forget .container_right .container_back .title ,.signIn .container_right .container_back .title{
+    font-weight: 500;
     margin-bottom: 2rem;
 }
 
+.login .container_right .title{
+    margin-top: 8rem;  
+}
+
+.login .container_right .title,  .signIn .container_right .container_back .title{
+    font-size: 4.5rem; 
+}
+
+.forget .container_right .container_back .title{
+    font-size: 2.5rem;
+}
+
+
 .login .container_right .description{
-    width: 18rem;  
+    width: 19.8rem;  
     padding-bottom: 2rem;
+    font-size: 1.2rem;
 }
 
 .login .container_right .description .clickable{
@@ -103,7 +136,7 @@
 }
 
 .login .container_right .login_form .label_for_box, .signIn .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box{
-    transform: translateX(1rem);
+    transform: translateX(0.2rem);
 }
 
 .login .container_right .login_form .box_input, .signIn .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
@@ -129,12 +162,12 @@
 }
 
 .signIn .container_right .signIn_form .title_gender{
-    transform: translateX(1rem);
+    transform: translateX(0.2rem);
 }
 
 .signIn .container_right .signIn_form .container_gender{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -143,11 +176,16 @@
     color: #1F4037;
     font-size: 1.6rem;
     cursor: pointer;
+    transform: translateX(-1.4rem);
 }
 
-.signIn .container_right .signIn_form .container_gender .male, .signIn .container_right .signIn_form .container_gender .female{
-    text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.2);
+.signIn .container_right .signIn_form .container_gender label:first-child{
+    margin-bottom: 0.7rem;
 }
+
+/* .signIn .container_right .signIn_form .container_gender .male, .signIn .container_right .signIn_form .container_gender .female{
+    text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.2);
+} */
 
 .signIn .container_right .signIn_form .container_gender .male{
     color: #284fff;
@@ -155,12 +193,6 @@
 
 .signIn .container_right .signIn_form .container_gender .female{
     color: #f12256;
-}
-
-.signIn .container_right .signIn_form .container_gender label:first-child{
-    transform: translateX(-0.4rem);
-    margin: 0rem 2rem;
-
 }
 
 .signIn .container_right .signIn_form .container_gender label input{
