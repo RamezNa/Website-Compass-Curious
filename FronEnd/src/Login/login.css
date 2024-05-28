@@ -258,13 +258,5 @@
         /* justify-content: center; */
         text-align: left;
     }
-
-    .signUp .container_right .signIn_form .container_gender label:first-child{
-        transform: translateX(-0.9rem);
-        margin: 0rem 0.9rem;
-    }
-
-    
-    
     
 }
