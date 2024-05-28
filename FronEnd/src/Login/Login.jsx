@@ -22,7 +22,7 @@ function Login(){
 
     const handleMoveSignInPage = (event) =>{
         event.preventDefault()
-        navigate('/SignIn')
+        navigate('/SignUp')
     }
 
     const handleMoveForgetPage = (event) =>{

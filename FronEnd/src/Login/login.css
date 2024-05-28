@@ -1,12 +1,11 @@
-.login , .signIn, .forget{
+.login , .signUp, .forget{
     display: flex;
     width: 100vw;
     min-height: 100vh;
     flex-direction: row;
 }
 
-
-.login .container_left, .signIn .container_left, .forget .container_left{
+.login .container_left, .signUp .container_left, .forget .container_left{
     width: 67vw;
     min-height: 100vh;
     display: flex;
@@ -24,7 +23,7 @@
     
 }
 
-.signIn .container_left{
+.signUp .container_left{
     background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-position: center;
     background-size: 70rem;
@@ -37,7 +36,7 @@
     text-align: center;
 }
 
-.login .container_left .title, .forget .container_left .title, .signIn .container_left .title {
+.login .container_left .title, .forget .container_left .title, .signUp .container_left .title {
     font-size: 3.5rem;
     margin-top: auto;
     margin-bottom: 2rem;
@@ -45,7 +44,7 @@
     text-transform: capitalize;
 }
 
-.login .container_left .subTitle, .forget .container_left .subTitle, .signIn .container_left .subTitle{
+.login .container_left .subTitle, .forget .container_left .subTitle, .signUp .container_left .subTitle{
     margin-bottom: auto;
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
     text-transform: capitalize;
@@ -58,12 +57,12 @@
 .forget .container_left .subTitle{
     font-size: 2.8rem;
 }
-.signIn .container_left .subTitle{
+.signUp .container_left .subTitle{
     font-size: 2rem;
 }
 
 
-.login .container_right , .forget .container_right ,.signIn .container_right{
+.login .container_right , .forget .container_right ,.signUp .container_right{
     width: 33vw;
     min-height: 100vh;
     display: flex;
@@ -73,14 +72,14 @@
 }
 
 
-.signIn .container_right .container_back, .forget .container_right .container_back{
+.signUp .container_right .container_back, .forget .container_right .container_back{
     display: flex;
     flex-direction: row;
     margin-top: 8rem;
     align-items: center;
 }
 
-.signIn .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
+.signUp .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
     font-size: 3.5rem;
     color: #2ECC71dc;
     transform: translateX(-2rem);
@@ -89,20 +88,20 @@
     cursor: pointer;
 }
 
-.signIn .container_right .container_back .icon_circule:hover, .forget .container_right .container_back .icon_circule:hover{
+.signUp .container_right .container_back .icon_circule:hover, .forget .container_right .container_back .icon_circule:hover{
     text-shadow: .1rem .1rem .35rem rgba(0, 0, 0, 0.3);
 }
 
-.login .container_right .title, .forget .container_right .container_back .title ,.signIn .container_right .container_back .title{
+.login .container_right .title, .forget .container_right .container_back .title ,.signUp .container_right .container_back .title{
     font-weight: 500;
     margin-bottom: 2rem;
 }
 
 .login .container_right .title{
-    margin-top: 8rem;  
+    margin-top: 7rem;  
 }
 
-.login .container_right .title,  .signIn .container_right .container_back .title{
+.login .container_right .title,  .signUp .container_right .container_back .title{
     font-size: 4.5rem; 
 }
 
@@ -130,16 +129,16 @@
 
 }
 
-.login .container_right .login_form, .signIn .container_right .signIn_form, .forget .container_right .forget_form{
+.login .container_right .login_form, .signUp .container_right .signIn_form, .forget .container_right .forget_form{
     display: flex;
     flex-direction: column;
 }
 
-.login .container_right .login_form .label_for_box, .signIn .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box{
+.login .container_right .login_form .label_for_box, .signUp .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box{
     transform: translateX(0.2rem);
 }
 
-.login .container_right .login_form .box_input, .signIn .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
+.login .container_right .login_form .box_input, .signUp .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
     width: 18rem;
     background-color: rgba(46, 204, 113,0.75);
     border: none;
@@ -151,55 +150,55 @@
     transition: .5s; 
 }
 
-.login .container_right .login_form .box_input:hover, .signIn .container_right .signIn_form .box_input:hover, .forget .container_right .forget_form .box_input:hover{
+.login .container_right .login_form .box_input:hover, .signUp .container_right .signIn_form .box_input:hover, .forget .container_right .forget_form .box_input:hover{
     transform: scale(1.05);
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
-.login .container_right .login_form .box_input:focus, .signIn .container_right .signIn_form .box_input:focus, .forget .container_right .forget_form .box_input:focus{
+.login .container_right .login_form .box_input:focus, .signUp .container_right .signIn_form .box_input:focus, .forget .container_right .forget_form .box_input:focus{
     outline: none;
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
-.signIn .container_right .signIn_form .title_gender{
+.signUp .container_right .signIn_form .title_gender{
     transform: translateX(0.2rem);
 }
 
-.signIn .container_right .signIn_form .container_gender{
+.signUp .container_right .signIn_form .container_gender{
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.signIn .container_right .signIn_form .container_gender label{
+.signUp .container_right .signIn_form .container_gender label{
     color: #1F4037;
     font-size: 1.6rem;
     cursor: pointer;
     transform: translateX(-1.4rem);
 }
 
-.signIn .container_right .signIn_form .container_gender label:first-child{
+.signUp .container_right .signIn_form .container_gender label:first-child{
     margin-bottom: 0.7rem;
 }
 
-/* .signIn .container_right .signIn_form .container_gender .male, .signIn .container_right .signIn_form .container_gender .female{
+/* .signUp .container_right .signIn_form .container_gender .male, .signUp .container_right .signIn_form .container_gender .female{
     text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.2);
 } */
 
-.signIn .container_right .signIn_form .container_gender .male{
+.signUp .container_right .signIn_form .container_gender .male{
     color: #284fff;
 }
 
-.signIn .container_right .signIn_form .container_gender .female{
+.signUp .container_right .signIn_form .container_gender .female{
     color: #f12256;
 }
 
-.signIn .container_right .signIn_form .container_gender label input{
+.signUp .container_right .signIn_form .container_gender label input{
     opacity: 0;
 }
 
-.login .container_right .login_form button, .signIn .container_right .signIn_form button, .forget .container_right .forget_form button{
+.login .container_right .login_form button, .signUp .container_right .signIn_form button, .forget .container_right .forget_form button{
     width: 20rem;
     background-color: rgba(46, 204, 113,0.75);
     border: none;
@@ -214,48 +213,53 @@
     transition: .5s;
 }
 
-.login .container_right .login_form button:hover, .signIn .container_right .signIn_form button:hover, .forget .container_right .forget_form button:hover{
+.login .container_right .login_form button:hover, .signUp .container_right .signIn_form button:hover, .forget .container_right .forget_form button:hover{
     transform: scale(1.05);
     box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
 }
 
-
-/* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
+.login .container_right .login_form .error_Message, .signUp .container_right .signIn_form .error_Message, .forget .container_right .forget_form .error_Message{
+    color: #f12256;
+    width: 20rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem ;
+    margin-bottom: 0.5rem;
+}
 
 @media (max-width: 700px) {
-    .login .container_left, .signIn .container_left, .forget .container_left{
+    .login .container_left, .signUp .container_left, .forget .container_left{
         width: 0vw;
         height: 0vh;
         display: none;
         
     }
     
-    .login .container_left, .signIn .container_left, .forget .container_left{
+    .login .container_left, .signUp .container_left, .forget .container_left{
         background-image: none;
         background-position: none;
         background-size: none;
         
     }
 
-    .login .container_right , .forget .container_right ,.signIn .container_right{
+    .login .container_right , .forget .container_right ,.signUp .container_right{
         width: 100vw;
         min-height: 100vh;
     }
     
-    .login .container_right .title, .forget .container_right .title ,.signIn .container_right .title{
+    .login .container_right .title, .forget .container_right .title ,.signUp .container_right .title{
         font-size: 5.5rem; 
     }
 
-    /* .signIn .container_right .signIn_form .title_gender{
+    /* .signUp .container_right .signIn_form .title_gender{
         transform: translateX(1.3rem);
     } */
 
-    .signIn .container_right .signIn_form .container_gender{
+    .signUp .container_right .signIn_form .container_gender{
         /* justify-content: center; */
         text-align: left;
     }
 
-    .signIn .container_right .signIn_form .container_gender label:first-child{
+    .signUp .container_right .signIn_form .container_gender label:first-child{
         transform: translateX(-0.9rem);
         margin: 0rem 0.9rem;
     }
