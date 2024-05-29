@@ -1,7 +1,20 @@
 import './history.css'
 import Location from './component/Location'
+import { useEffect } from 'react'
+import { auth } from '../Firebase/firebase'
+import { useNavigate } from 'react-router-dom'
+
+
 
 function History(){
+    const navigate = useNavigate()
+    //TODO make something that check if is login cant go to LOGIN page or SignUp Or Rest PassWord
+    useEffect(() =>{
+        if( auth?.currentUser?.email == null ){
+            navigate('/')
+        }
+    },[])
+
 return(
     <div className="history">
         <div className='header'>

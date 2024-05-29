@@ -36,6 +36,7 @@
     font-size: 3rem;
     text-transform: capitalize;
     margin-bottom: 4rem;
+    line-height: 5rem;
 }
 
 .history .line{
@@ -96,4 +97,9 @@
     align-self: self-end;
 }
 
-/* TODO make respose and on the small phone make the height is smaller than 90vh to something 60vh */
+@media (max-width:500px){
+    .history .subTitle{
+        font-size: 1.8rem;
+        
+    }
+}
