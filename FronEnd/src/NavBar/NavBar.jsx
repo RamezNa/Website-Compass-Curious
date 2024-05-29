@@ -1,7 +1,10 @@
 // import images
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { auth, db } from '../Firebase/firebase';
+import {signOut} from 'firebase/auth'
+import { collection, query, where, getDocs} from 'firebase/firestore'
 
 import logo_img from './Images/Logo.jpeg'
 
@@ -56,6 +59,39 @@ function NavBar(){
         }
       };
 
+      const [gend,setGend] = useState('')
+
+      const Logout = async () => {
+        try {
+            await signOut(auth)
+            setGend('')
+            navigate('/')
+        } catch (error) {
+            console.error(error)
+        }
+      }
+
+      useEffect( ()=>{
+        const handleGetGender =  () => {
+            setTimeout( async() =>{
+                try {
+                    const em = auth?.currentUser?.email
+                    if(em == undefined){
+                        return
+                    }
+                    const q = query(collection(db, '_users'), where('email', '==', em));
+                    const querySnapshot = await getDocs(q);
+                    setGend(querySnapshot.docs[0].data().gender)
+                  
+                } catch (error) {
+                    console.error(error.message);
+                }
+            }, 1000)
+          };
+
+          handleGetGender()
+      }, [])
+
     return <>
     <div className={!isNavBarClicked ? 'show_unshow_navbar' : 'show_unshow_navbar clicked_btn'} onClick={handleNavBarIconClicked}>
         <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
@@ -77,12 +113,16 @@ function NavBar(){
                 <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>
             </li>
             <li >
-                <Link to="/Login" >
-                    <Img_Hover url_hovered={user_green_offline} url_unHovered={user_white_offline} class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
+                <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } >
+                    <Img_Hover url_hovered={ (auth?.currentUser?.email == undefined) ? user_green_offline : null } url_unHovered={ (auth?.currentUser?.email == undefined) ? user_white_offline : ( (gend == 'male') ? login_boy :login_girl )  } class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
                 </Link>
+               
             </li>
-        </ul>    
+        </ul> 
+        {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={Logout}>✧ LogOut ✧</p>   }
+        
     </nav>
+
     </>
 }
     
