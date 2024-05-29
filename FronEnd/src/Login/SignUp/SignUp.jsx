@@ -1,25 +1,25 @@
 import '../login.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {auth} from '../../Firebase/firebase'
+import {auth , db} from '../../Firebase/firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {doc, setDoc, getDoc} from 'firebase/firestore'
+
 
 function SignUp(){
+    
     const navigate = useNavigate()
+    
     const handleNav = (event) => {
         event.preventDefault()
+        // move to the Login page
         navigate('/Login')
     }
 
     const[email,setEmail] = useState('')
-    const handleEmail = (event) =>{
-        setEmail(event.target.value)
-    }
 
-    const[password,setPassword] = useState('')
-    const handlePassword = (event) =>{
-        setPassword(event.target.value)
-    }
+
+    const[password,setPassword] = useState('')    
 
     const [selectedOption, setSelectedOption] = useState('');
 
@@ -32,16 +32,25 @@ function SignUp(){
     const signUp = async (event) =>{
         event.preventDefault()
         try {
-            await createUserWithEmailAndPassword(auth, email, password)
-            // TODO save in the firestore the data :)
-            // TODO move to the main page 
-            // TODO navigate Login
-            console.log('User created successfully');
+            // make the email and the password for the user
+            const userCond = await createUserWithEmailAndPassword(auth, email, password)
+            // save in the firestore the data :)
+            const user = userCond.user
+            await setDoc(doc(db, '_users',user.uid),{email: user.email, gender: selectedOption,history: []})
+            // move to the Main page
+            navigate('/') 
         } catch (error) {
             setError_message(error.message)
             console.error('Error during sign-in:', error);
         }
     }
+
+    //TODO make something that check if is login cant go to LOGIN page or SignUp Or Rest PassWord
+    useEffect(() =>{
+        if( auth?.currentUser?.email != undefined ){
+            navigate('/')
+        }
+    },[])
 
     return(
     <div className="signUp">
@@ -56,10 +65,10 @@ function SignUp(){
             </div>
             <form className="signIn_form" onSubmit={signUp}>
                 <label className="label_for_box">Email</label>
-                <input className="box_input" type="email" value={email} onChange={handleEmail} placeholder='example@gmail.com' required/>
+                <input className="box_input" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder='example@gmail.com' required/>
 
                 <label className="label_for_box">Password</label>
-                <input className="box_input" type="password" value={password} minLength='6' onChange={handlePassword} placeholder='*****' required/>
+                <input className="box_input" type="password" value={password} minLength='6' onChange={(event) => setPassword(event.target.value)} placeholder='*****' required/>
                 
                 <label className="title_gender">Gender</label>
                 <div className='container_gender'>
@@ -72,7 +81,7 @@ function SignUp(){
                         ♀ Female
                     </label>
                 </div>
-                <p className='error_Message'>{(error_message.length > 0) ? 'The Email Is Already Sign Up' : ""}</p>
+                <p className='error_Message'>{(error_message.length > 0) ? 'Error: Looks Like This Email Address Is Already Signed Up!' : ""}</p>
                 <button type="submit"> Sign Up </button>
             </form>
         </div>

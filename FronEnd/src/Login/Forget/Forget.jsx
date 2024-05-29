@@ -1,6 +1,8 @@
 import '../login.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../Firebase/firebase'
+import {sendPasswordResetEmail} from 'firebase/auth'
 
 function Forget(){
     const navigate = useNavigate()
@@ -10,9 +12,25 @@ function Forget(){
     }
 
     const[email,setEmail] = useState('')
-    const handleEmail = (event) =>{
-        setEmail(event.target.value)
+    const[error_message,setError_message] = useState('')
+
+    const handleReset = async(event) => {
+        event.preventDefault()
+        try {
+           await sendPasswordResetEmail(auth,email) 
+           navigate('/Login')//navigate('/') TODO check if we need to move to login page or the main  
+        } catch (error) {
+            setError_message(error.message)
+            console.error(error)
+        }
     }
+
+    //TODO make something that check if is login cant go to LOGIN page or SignUp Or Rest PassWord
+    useEffect(() =>{
+        if( auth?.currentUser?.email != undefined ){
+            navigate('/')
+        }
+    },[])
 
     return(
     <div className="forget">
@@ -27,9 +45,10 @@ function Forget(){
             </div>
             
             {/* TODO Make someting when make Forget :) onSumbit */}
-            <form className="forget_form" onSubmit="">
+            <form className="forget_form" onSubmit={handleReset}>
                 <label className="label_for_box">Email</label>
-                <input className="box_input" type="email" value={email} onChange={handleEmail} required/>
+                <input className="box_input" type="email" value={email} onChange={(event) =>setEmail(event.target.value)} placeholder='example@gmail.com' required/>
+                <p className='error_Message'>{(error_message.length > 0) ? 'Error: Incorrect Email. Please check and try again.' : ""}</p>
                 <button type="submit"> Reset </button>
             </form>
         </div>

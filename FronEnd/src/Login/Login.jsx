@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 
 import { useNavigate } from 'react-router-dom';
+
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import {auth} from '../Firebase/firebase'
 
 
 import './login.css'
@@ -11,14 +14,10 @@ function Login(){
     const navigate = useNavigate();
 
     const[email,setEmail] = useState('')
-    const handleEmail = (event) =>{
-        setEmail(event.target.value)
-    }
 
     const[password,setPassword] = useState('')
-    const handlePassword = (event) =>{
-        setPassword(event.target.value)
-    }
+
+    const[error_message,setError_message] = useState('')
 
     const handleMoveSignInPage = (event) =>{
         event.preventDefault()
@@ -30,6 +29,24 @@ function Login(){
         navigate('/Forget')
     }
 
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        try{
+            await signInWithEmailAndPassword(auth,email,password)
+            navigate('/')
+        }catch(error){
+            setError_message(error.message)
+            console.error(error)
+        }
+    }
+
+    //TODO make something that check if is login cant go to LOGIN page or SignUp Or Rest PassWord
+    useEffect(() =>{
+        if( auth?.currentUser?.email != undefined ){
+            navigate('/')
+        }
+    },[])
+    
     return(
     <>
     <div className="login">
@@ -39,17 +56,17 @@ function Login(){
         </div>
         <div className="container_right">
             <h3 className="title">Login</h3>
-            <p className="description"> New to Compass Curious?<br/><Link className="clickable" onClick={handleMoveSignInPage} to="/TODO">Sign up</Link> for free to unlock a world of travel inspiration. </p>
-            {/* TODO Make someting when make login :) onSumbit */}
-            <form className="login_form" onSubmit="">
+            <p className="description"> New to Compass Curious?<br/><Link className="clickable" onClick={handleMoveSignInPage} >Sign up</Link> for free to unlock a world of travel inspiration. </p>
+            <form className="login_form" onSubmit={handleLogin}>
                 <label className="label_for_box">Email</label>
-                <input className="box_input" type="email" value={email} onChange={handleEmail} required/>
+                <input className="box_input" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder='example@gmail.com' required/>
 
                 <label className="label_for_box">Password</label>
-                <input className="box_input" type="password" value={password} onChange={handlePassword} required/>
+                <input className="box_input" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder='*****' required/>
+                <p className='error_Message'>{(error_message.length > 0) ? 'Error: Incorrect Email or Password. Please check and try again.' : ""}</p>
                 <button type="submit"> Login </button>
             </form>
-            <p className="description"> Forgot your password?<br/>No worries! <Link className="clickable" onClick={handleMoveForgetPage} to="/TODO">Click here</Link> to reset it </p>
+            <p className="description"> Forgot your password?<br/>No worries! <Link className="clickable" onClick={handleMoveForgetPage} >Click here</Link> to reset it </p>
         </div>
 
     </div>
