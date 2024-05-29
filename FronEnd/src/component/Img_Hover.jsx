@@ -6,6 +6,7 @@ const Img_Hover= ( {url_hovered , url_unHovered, class_name, alt_name } ) => {
 
     // Function to handle mouse enter event
     const handleMouseEnter = () => {
+        
         setIsHovered(true);
     };
 
@@ -14,7 +15,7 @@ const Img_Hover= ( {url_hovered , url_unHovered, class_name, alt_name } ) => {
         setIsHovered(false);
     };
 
-    return <img className={class_name} src={ !isHovered ? url_unHovered : url_hovered } alt={alt_name} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
+    return <img className={class_name} src={ !isHovered ? url_unHovered : (url_hovered == null ? url_unHovered : url_hovered) } alt={alt_name} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
 }
 
   
