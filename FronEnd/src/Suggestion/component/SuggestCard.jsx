@@ -5,12 +5,12 @@ function SuggestCard({which_day, url, location_name, description, numDays  }){
     const [isLoading, setIsLoading] = useState(false)
 
     return(
-        <Element className="container_data" name={which_day} >
+        <Element className="container_data" name={String(which_day)} >
             <div className='container_day'>
-                { which_day-1 < 1 ? '' : <Link to={ (which_day-1) } smooth={true} duration={500} className='left'>⇠</Link>}
+                { which_day-1 < 1 ? '' : <Link to={ String(which_day-1) } smooth={true} duration={500} className='left'>⇠</Link>}
                 <div className='line'></div>
                 <h3 className='day'>{which_day} Day</h3>
-                { which_day+1 > numDays ? '' : <Link to={ (which_day+1) } smooth={true} duration={500} className='right'>⇢</Link>}
+                { which_day+1 > numDays ? '' : <Link to={ String(which_day+1) } smooth={true} duration={500} className='right'>⇢</Link>}
             </div>
             <div className='container_img_data'>
                 {!isLoading && <img src='https://i.gifer.com/ZKZg.gif' alt='loading_gif' className='loading'/>}
