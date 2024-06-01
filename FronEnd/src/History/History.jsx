@@ -8,12 +8,23 @@ import { useNavigate } from 'react-router-dom'
 
 function History(){
     const navigate = useNavigate()
-    //TODO make something that check if is login cant go to LOGIN page or SignUp Or Rest PassWord
-    useEffect(() =>{
-        if( auth?.currentUser?.email == null ){
-            navigate('/')
-        }
-    },[])
+
+    useEffect( ()=>{
+
+        const unsubscribe = auth.onAuthStateChanged(() => {
+            try {
+                if( auth?.currentUser?.email == undefined ){
+                    navigate('/')
+                }
+                 
+            } catch (error) {
+                console.error(error);
+            }  
+        });
+       
+         return () => unsubscribe();
+
+      }, [])
 
 return(
     <div className="history">
