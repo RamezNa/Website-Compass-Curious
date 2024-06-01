@@ -9,7 +9,7 @@
     background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_1.jpg');
     background-position: center;
     background-size: cover;
-    min-width:100vw;
+    max-width:100vw;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@ input[type='number'] {
     background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_2.jpg');
     background-position: center;
     background-size: cover;
-    width:100vw;
+    max-width:100vw;
     padding-top: 7rem;
     text-align: center;
     display: flex;
