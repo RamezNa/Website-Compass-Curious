@@ -72,24 +72,24 @@ function NavBar(){
       }
 
       useEffect( ()=>{
-        const handleGetGender =  () => {
-            setTimeout( async() =>{
-                try {
-                    const em = auth?.currentUser?.email
-                    if(em == undefined){
-                        return
-                    }
-                    const q = query(collection(db, '_users'), where('email', '==', em));
-                    const querySnapshot = await getDocs(q);
-                    setGend(querySnapshot.docs[0].data().gender)
-                  
-                } catch (error) {
-                    console.error(error.message);
-                }
-            }, 1000)
-          };
 
-          handleGetGender()
+        const unsubscribe = auth.onAuthStateChanged(async () => {
+            try {
+                const em = auth?.currentUser?.email
+                if(em == undefined){
+                    return 
+                }
+                const q = query(collection(db, '_users'), where('email', '==', em));
+                const querySnapshot = await getDocs(q);
+                setGend(querySnapshot.docs[0].data().gender)
+                 
+            } catch (error) {
+                console.error(error);
+            }  
+        });
+       
+        return () => unsubscribe();
+
       }, [])
 
     return <>
