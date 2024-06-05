@@ -1,21 +1,31 @@
 import './history.css'
 import Location from './component/Location'
-import { useEffect } from 'react'
-import { auth } from '../Firebase/firebase'
+import { useEffect,useState } from 'react'
+import { auth,db } from '../Firebase/firebase'
 import { useNavigate } from 'react-router-dom'
+import { collection, query, getDocs,where } from 'firebase/firestore';
 
 
 
 function History(){
     const navigate = useNavigate()
 
+    const [listOfHistory,setListOfHistory] = useState([])
+
     useEffect( ()=>{
 
-        const unsubscribe = auth.onAuthStateChanged(() => {
+        const unsubscribe = auth.onAuthStateChanged( async () => {
             try {
-                if( auth?.currentUser?.email == undefined ){
+                const email_user = auth?.currentUser?.email
+
+                if( email_user == undefined ){
                     navigate('/')
                 }
+
+                const q = query(collection(db, '_users'), where('email', '==', email_user));
+                const querySnapshot = await getDocs(q);
+                console.log(querySnapshot.docs[0].data().history)   
+                setListOfHistory(querySnapshot.docs[0].data().history)
                  
             } catch (error) {
                 console.error(error);
@@ -35,13 +45,9 @@ return(
         <h2 className='subTitle'>Continue planning your dream trip!<br/>Access your saved itineraries for inspiration.</h2>
         <div className='line'></div>
         <div className="container_data">
-            <Location url={'https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg'} nameLocation={'China'} numDays={4} />
-            <Location url={'https://images.unsplash.com/photo-1587297069400-6cc5da81658a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} nameLocation={'jerusalem'} numDays={1} />
-            <Location url={'https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg'} nameLocation={'China'} numDays={4} />
-            <Location url={'https://images.unsplash.com/photo-1587297069400-6cc5da81658a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} nameLocation={'jerusalem'} numDays={1} />
-            <Location url={'https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg'} nameLocation={'China'} numDays={4} />
-            <Location url={'https://images.unsplash.com/photo-1587297069400-6cc5da81658a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} nameLocation={'jerusalem'} numDays={1} />
-            <Location url={'https://images.unsplash.com/photo-1587297069400-6cc5da81658a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} nameLocation={'jerusalem'} numDays={1} />
+            {listOfHistory.map( (loc,index) =>(
+                <Location url={loc.url} nameLocation={loc.location} numDays={loc.days} key={index} />
+            ) )}
         </div>
     </div>
 )
