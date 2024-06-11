@@ -154,7 +154,7 @@ class Scraper:
 
     # function that get from the pintrest img that descripe the location
     async def get_img_pintrest(self,location):
-        URL = 'https://www.pinterest.com/search/pins/?q=' + location
+        URL = 'https://www.pinterest.com/search/pins/?q=' + location + ' city'
 
         try:
             text_BS = await self.get_html_file_fast(URL)
