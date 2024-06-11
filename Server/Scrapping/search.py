@@ -12,9 +12,6 @@ class Scraper:
     
     def __init__(self):
         self.data = []
-        self.time_to_wait = 1000
-        self.is_finished = False
-        self.URL = ''
 
     async def get_html_file_fast(self,url):
         browser = await launch(headless=True)
@@ -24,8 +21,6 @@ class Scraper:
         await browser.close()
         return BeautifulSoup(html_content , 'lxml')
   
-    
-
     # fuction that help me to change the width and the height of the url 
     async def resize_image_url(self, url, width, height):
         # Parse the URL
@@ -55,39 +50,17 @@ class Scraper:
 
         URL = "https://www.lonelyplanet.com/search?places%5Bquery%5D=" + location + "&places%5BsortBy%5D=pois"        
         # variable to help me to increase the time to wait in the website in fail get the file html
-        faild_connect_to_fetch_html = 0
 
         # start making the Scraping from the file html
         while True:
-            # try to get the file html of the page website
+            # get the file html of the page website
             try:
                 text_BS = await self.get_html_file_fast(URL)
-
-                list_of_locations = (text_BS.find('section' , class_ = 'relative my-12 md:mt-20 container lg:flex lg:justify-between')).div.ul
-
-            # if there any problem with the file html try another time with time load big from than previuas
-            except AttributeError as e:
-
-                faild_connect_to_fetch_html += 1
-
-                self.time_to_wait += (faild_connect_to_fetch_html * 1000)
-                # if we try to fetch the file more than 3 time stop the search function
-                if faild_connect_to_fetch_html == 3:
-
-                    self.time_to_wait -= (faild_connect_to_fetch_html * 1000)
-                    faild_connect_to_fetch_html = 0
-
-                    self.URL = URL
-                    return 
-
-                continue
-
-            # return the value to the default
-            if faild_connect_to_fetch_html != 0:
-
-                self.time_to_wait -= (faild_connect_to_fetch_html * 1000)
-                faild_connect_to_fetch_html = 0
-
+                list_of_locations = (text_BS.find('section' , class_ = 'relative my-12 md:mt-20 container lg:flex lg:justify-between')).div.ul  
+            except Exception as e:
+                print('Error to get the page: ', e)
+                return    
+            
             # for the list of the child search on the realvent data and saveit
             for child in  list_of_locations.contents:
 
@@ -151,24 +124,20 @@ class Scraper:
                 URL = ((text_BS.find('div' , class_ = 'relative pl-2')).a).get('href') 
 
                 if URL == None:
-                    
-                    self.is_finished = True
-                    self.URL = ''
                     return
-                
+
                 # wait to next page 
                 await asyncio.sleep(5)
 
             except AttributeError as e:
-                    self.URL = URL
                     return 
 
     # function that get the full data about location
     async def get_full_data(self, URL):
         data_location_html_file = (await (((self.get_html_file_fast(URL))))) 
-
+        # get the full data data 
         full_data = data_location_html_file.find('div' , class_ = 'readMore_content__bv7mp').text
-
+        # get url to the location of the 
         location = (data_location_html_file.find('p' , class_ = 'text-md lg:text-lg mb-4 lg:mb-0').a).get('href')
                     
         return [full_data, location]

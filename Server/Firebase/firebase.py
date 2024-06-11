@@ -42,10 +42,7 @@ async def is_in_firestore(collection_name):
     if not any(docs):
         # make scrapping to get the data 
         search_for_new_data = Scraper()
-        
         await search_for_new_data.search(collection_name , 'attractions')
-        
-        
         return True
     
     return False

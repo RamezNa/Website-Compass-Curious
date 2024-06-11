@@ -8,11 +8,11 @@ import multiprocessing
 
 app = Flask(__name__)
 
+# this function is worked to fetch data from the website google and pintrest or add to firestore trend 
 async def async_trend(location, day):
-    # check if the location is exist
     await is_in_firestore_trend(location, day)
 
-
+# this function is help me to make the function work in thread
 def start_trend(location, day):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -26,15 +26,17 @@ async def make_trend(location , day):
     proces.start()
     return 'Successful', 200
 
+# this variable is saved the task that i do in the search engine
 tasks = {}
 
+# this function is worked to fetch data from the website only depend on the location
 async def async_work(location):
-    # check if the location is exist
+    # make the search start in here function
     await is_in_firestore(location)
-
     # remove the task 
     tasks.pop(location)
 
+# this function is help me to make the function work in thread
 def start_me(location):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
