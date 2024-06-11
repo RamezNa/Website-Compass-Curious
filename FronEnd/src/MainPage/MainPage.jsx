@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './mainPage.css'
@@ -11,10 +11,13 @@ import sumbit_answer_g from './Images/lets-go_g.png'
 
 import icon_search from './Images/search.png'
 
+import { db } from '../Firebase/firebase'
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+
 
 function MainPage(){
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const maxDay = 30
     const minDay = 0
@@ -29,7 +32,6 @@ function MainPage(){
     const changeDays = (event) =>{
 
         const the_value = event.target.value
-        console.log(the_value)
 
         if(the_value > maxDay){
             setdays(maxDay)
@@ -44,12 +46,30 @@ function MainPage(){
     const handleSubmit = (event) => {
         // TODO check that the location is valid :)
         event.preventDefault()
-        navigate('/Suggestion')
+        navigate('/Suggestion', {state: {location: (location.trim().toLowerCase()),numdays: days }})
     }
-    
+
+    const [listOfTrends,getListOfTrends] = useState([])
+    const [isLoading,setIsLoading] = useState(true)
+
+    useEffect( () =>{
+        const  getData = async () =>{
+            try {
+                const q = query(collection(db, '_trend'), orderBy('numTrend', 'desc'), limit(5));
+                const querySnapshot = await getDocs(q);
+                const trends = querySnapshot.docs.map(doc => doc.data());
+                getListOfTrends(trends)
+                setIsLoading(false)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getData() 
+    },[] )
     
     return (
         <>
+        
         <div className='container_MP'>
             <div className='search' id='Main'>
                 <div className="content">
@@ -66,7 +86,7 @@ function MainPage(){
                         <div className="container_submit">
                             
                             <input className='day_input' type="number" value={days == 0 ? '' : days } max={maxDay} min={minDay} onChange={changeDays} placeholder='How Much Days' required/>
-                            {/*TODO move to bage suggestion and make loading to the page  */}
+                            {/* TODO move to page suggestion and make loading to the page  */}
                             <button type='submit' className='btn_submit'>
                                 <Img_Hover url_hovered={sumbit_answer_g} url_unHovered={sumbit_answer_w} class_name={'icon_go'} alt_name={"submit"} />
                             </button>
@@ -78,9 +98,15 @@ function MainPage(){
                 
                 <h1 className='title'>Inspired By Travelers</h1>
                 <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
-                {/* TODO Make map to recived the data */}
-                <Box_Img_Description class_={'left'} number ={1} number_of_days={5}  name_location={'Jerusalem'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
-                <Box_Img_Description class_={'right'} number ={2} number_of_days={10}  name_location={'Tel Aviv'}  description={'is the most populous city in the Gush Dan metropolitan area of Israel.'} /> 
+                {/* TODO Check witch one to choice for loading */}
+                {isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> }
+                {/* TODO make the days ( array / list ) in firestore and in the code recived array desine it and : */}
+                {/* TODO make arrow to move bettween the days and make animation when move right or left */}
+                {/* TODO make when click on the day it make a suggestion for me by the day that choice and the location */}
+
+                {listOfTrends.map( (trend,index) => (
+                    <Box_Img_Description class_={ (index % 2 == 0 ) ? 'left' : 'right'} number={index + 1} number_of_days={trend.days}  name_location={trend.location}  description={trend.description} url={trend.url} key={index}/> 
+                ) )}
             </div>   
         </div>
         </>
