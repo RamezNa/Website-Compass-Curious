@@ -1,9 +1,4 @@
 from bs4 import BeautifulSoup
-import requests
-from requests.adapters import HTTPAdapter
-from requests.exceptions import RetryError
-from requests_html import AsyncHTMLSession
-import aiohttp
 import nest_asyncio
 from pyppeteer import launch
 # used to help me change the width and the height of the picture 
