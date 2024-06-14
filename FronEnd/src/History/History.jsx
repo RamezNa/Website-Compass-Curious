@@ -11,6 +11,7 @@ function History(){
     const navigate = useNavigate()
 
     const [listOfHistory,setListOfHistory] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect( ()=>{
 
@@ -26,7 +27,8 @@ function History(){
                 const querySnapshot = await getDocs(q);
                 console.log(querySnapshot.docs[0].data().history)   
                 setListOfHistory(querySnapshot.docs[0].data().history)
-                 
+                setIsLoading(true)
+
             } catch (error) {
                 console.error(error);
             }  
@@ -37,6 +39,7 @@ function History(){
       }, [])
 
 return(
+    // TODO when we add two that has the same loation but difrent day we need to make arrow to do that
     <div className="history">
         <div className='header'>
             <div className='line'></div>
@@ -44,7 +47,9 @@ return(
         </div>
         <h2 className='subTitle'>Continue planning your dream trip!<br/>Access your saved itineraries for inspiration.</h2>
         <div className='line'></div>
+        {!isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/>}
         <div className="container_data">
+            {/* TODO make when clicked moved to page suggestion and load the suggestion */}
             {listOfHistory.map( (loc,index) =>(
                 <Location url={loc.url} nameLocation={loc.location} numDays={loc.days} key={index} />
             ) )}
