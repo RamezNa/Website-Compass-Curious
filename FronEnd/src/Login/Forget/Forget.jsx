@@ -50,7 +50,7 @@ function Forget(){
         </div>
         <div className="container_right">
             <div className="container_back">
-                <span className='icon_circule' onClick={handleNav}>⬅</span>
+                <span className='icon_circule' onClick={handleNav}>↜</span>
                 <h3 className="title"> Reset Password</h3>
             </div>
             

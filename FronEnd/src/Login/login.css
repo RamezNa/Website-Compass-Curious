@@ -86,6 +86,7 @@
     margin-bottom: 2rem;
     transition: .4s;
     cursor: pointer;
+    font-weight: 800;
 }
 
 .signUp .container_right .container_back .icon_circule:hover, .forget .container_right .container_back .icon_circule:hover{
@@ -123,7 +124,6 @@
 }
 
 .login .container_right .description .clickable:hover{
-    /* font-size: 1.2rem; */
     font-weight: 500;
     text-shadow: .1rem .1rem .15rem rgba(0, 0, 0, 0.1);
 
@@ -173,18 +173,17 @@
 
 .signUp .container_right .signIn_form .container_gender label{
     color: #1F4037;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
+    font-weight: 400;
     cursor: pointer;
     transform: translateX(-1.4rem);
+    padding-left: 0.8rem;
+
 }
 
 .signUp .container_right .signIn_form .container_gender label:first-child{
     margin-bottom: 0.7rem;
 }
-
-/* .signUp .container_right .signIn_form .container_gender .male, .signUp .container_right .signIn_form .container_gender .female{
-    text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.2);
-} */
 
 .signUp .container_right .signIn_form .container_gender .male{
     color: #284fff;
@@ -227,6 +226,7 @@
 }
 
 @media (max-width: 700px) {
+
     .login .container_left, .signUp .container_left, .forget .container_left{
         width: 0vw;
         height: 0vh;
@@ -244,19 +244,128 @@
     .login .container_right , .forget .container_right ,.signUp .container_right{
         width: 100vw;
         min-height: 100vh;
+        
     }
     
-    .login .container_right .title, .forget .container_right .title ,.signUp .container_right .title{
-        font-size: 5.5rem; 
+    .login .container_right .title ,.signUp .container_right .title{
+        font-size: 9.5rem; 
     }
 
-    /* .signUp .container_right .signIn_form .title_gender{
-        transform: translateX(1.3rem);
-    } */
+    .forget .container_right .container_back .title{
+        font-size: 6.5rem;
+    }
 
+    .signUp .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
+        font-size: 5.5rem;
+    }
+
+    .login .container_right .description{
+        width: 40rem;  
+        font-size: 3.2rem; 
+    }
+
+    .login .container_right .login_form .label_for_box, .signUp .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box, .signUp .container_right .signIn_form .title_gender{
+        font-size: 3rem;
+        transform: translateX(2rem);
+    }
+
+    .login .container_right .login_form .box_input, .signUp .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
+        width: 48rem;
+        padding: 1.5rem;
+        margin-bottom: 4rem;
+        font-size: 2.7rem; 
+        border-radius: 1rem;
+    }
+
+    .signUp .container_right .signIn_form .container_gender label{
+        font-size: 4rem;
+        font-weight: 500;
+    }
+
+    .login .container_right .login_form button, .signUp .container_right .signIn_form button, .forget .container_right .forget_form button{
+        width: 51rem;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        font-size: 2.7rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .login .container_right .login_form .error_Message, .signUp .container_right .signIn_form .error_Message, .forget .container_right .forget_form .error_Message{
+        width: 40rem;
+        font-size: 2.2rem;
+        margin-top: 1rem ;
+        margin-bottom: 1rem;
+    }
+    
     .signUp .container_right .signIn_form .container_gender{
-        /* justify-content: center; */
         text-align: left;
     }
     
+}
+
+@media (max-width: 400px) {
+    .login .container_right .title, .forget .container_right .container_back .title ,.signUp .container_right .title{
+        font-size: 7.5rem; 
+    }
+
+    .forget .container_right .container_back .title{
+        font-size: 4.5rem;
+    }
+
+    .signUp .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
+        font-size: 4rem;
+    }
+
+    .login .container_right .description{
+        width: 35rem;  
+        font-size: 2.5rem; 
+    }
+
+    .login .container_right .login_form .label_for_box, .signUp .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box,.signUp .container_right .signIn_form .title_gender{
+        font-size: 2rem;
+    }
+
+    .login .container_right .login_form .box_input, .signUp .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
+        width: 34rem;
+        font-size: 2.4rem; 
+    }
+
+    .signUp .container_right .signIn_form .container_gender label{
+        font-size: 3rem;
+    }
+
+    .login .container_right .login_form button, .signUp .container_right .signIn_form button, .forget .container_right .forget_form button{
+        width: 37rem;
+        font-size: 2.7rem;
+    }
+
+    .login .container_right .login_form .error_Message, .signUp .container_right .signIn_form .error_Message, .forget .container_right .forget_form .error_Message{
+        width: 28rem;
+        font-size: 2rem;
+    }
+    
+}
+
+@media (max-width: 270px){
+
+    .forget .container_right .container_back .title{
+        font-size: 3rem;
+    }
+
+    .login .container_right .description{
+        max-width: 25rem;  
+        font-size: 2rem; 
+    }
+
+    .login .container_right .login_form .box_input, .signUp .container_right .signIn_form .box_input, .forget .container_right .forget_form .box_input{
+        max-width: 24rem;
+        font-size: 2rem; 
+    }
+
+    .login .container_right .login_form button, .signUp .container_right .signIn_form button, .forget .container_right .forget_form button{
+        max-width: 18rem;
+        font-size: 2rem;
+    }
+
 }

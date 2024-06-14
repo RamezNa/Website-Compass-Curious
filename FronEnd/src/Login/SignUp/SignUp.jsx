@@ -70,7 +70,7 @@ function SignUp(){
         </div>
         <div className="container_right">
             <div className="container_back">
-                <span className='icon_circule' onClick={handleNav}>⬅</span>
+                <span className='icon_circule' onClick={handleNav}>↜</span>
                 <h3 className="title">Sign Up</h3>
             </div>
             <form className="signIn_form" onSubmit={signUp}>
