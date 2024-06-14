@@ -1,12 +1,21 @@
-from flask import Flask
+from flask import Flask, jsonify
 from .Firebase.firebase import *
 from asgiref.wsgi import WsgiToAsgi
 import asyncio
 import uvicorn
 import signal
 import multiprocessing
+# from flask_cors import CORS
+
 
 app = Flask(__name__)
+# CORS(app)
+@app.after_request
+def add_cors_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+    return response
 
 # this function is worked to fetch data from the website google and pintrest or add to firestore trend 
 async def async_trend(location, day):
@@ -20,7 +29,7 @@ def start_trend(location, day):
 
 
 # route to update the firebase and get data and img from the google and pitrest :)
-@app.route('/trend/<string:location>/<int:day>', methods=['POST'])
+@app.route('/trend/<string:location>/<int:day>', methods=['GET'])
 async def make_trend(location , day):
     proces = multiprocessing.Process(target=start_trend, args=(location, day))
     proces.start()

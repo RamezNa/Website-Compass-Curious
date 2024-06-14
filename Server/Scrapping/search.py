@@ -61,56 +61,62 @@ class Scraper:
                 print('Error to get the page: ', e)
                 return    
             
-            # for the list of the child search on the realvent data and saveit
-            for child in  list_of_locations.contents:
+            try:
+            # for the list of the child search on the realvent data and save it
+                for child in  list_of_locations.contents:
 
-                # try to fetch the data if there is any problem skip this child
-                try:
-                    # get the attractions from the website to make filter to answer 
-                    type_of_location = (((child.find('div' , class_ = 'text-sm uppercase font-semibold tracking-wide relative z-10 mb-2 w-90 text-black-400 block')).text).split())
-                    where_Is = type_of_location[2]
-                    type_of_location = type_of_location[0]
-                    
-                    if attractions:
-                        if type_of_location != attractions:
-                            continue
+                    # try to fetch the data if there is any problem skip this child
+                    try:
+                        # get the attractions from the website to make filter to answer 
+                        type_of_location = (((child.find('div' , class_ = 'text-sm uppercase font-semibold tracking-wide relative z-10 mb-2 w-90 text-black-400 block')).text).split())
+                        where_Is = type_of_location[2]
+                        type_of_location = type_of_location[0]
                         
-                    # make new dictionary
-                    new_location_dictionary = {}
+                        if attractions:
+                            if type_of_location not in attractions :
+                                continue
+                            
+                        # make new dictionary
+                        new_location_dictionary = {}
 
-                    # define the name of the location
-                    new_location_dictionary['name'] = (child.find('a')).text
+                        # define the name of the location
+                        new_location_dictionary['name'] = (child.find('a')).text
 
-                    # define the type of the location
-                    new_location_dictionary['type'] = type_of_location
+                        # define the type of the location
+                        new_location_dictionary['type'] = type_of_location
 
-                    # define the img of the location
-                    url_img = (child.find('img')).get('src')
-                    new_location_dictionary['img'] = await self.resize_image_url(url_img, 1920, 1920)
-                                        
-                    # define the data of the location
-                    new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' ).text
+                        # define the img of the location
+                        url_img = (child.find('img')).get('src')
+                        new_location_dictionary['img'] = await self.resize_image_url(url_img, 1920, 1920)
+                        # TODO if the image from lonelyplanetstatic find new image
+                        if 'lonelyplanetstatic' in new_location_dictionary['img']:
+                            new_location_dictionary['img'] = await self.get_img_pintrest(new_location_dictionary['name'])
+                                            
+                        # define the data of the location
+                        new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' ).text
 
-                    # get the url of the full data
-                    description_of_the_location_URL = 'https://www.lonelyplanet.com' + (child.find('a')).get('href')
+                        # get the url of the full data
+                        description_of_the_location_URL = 'https://www.lonelyplanet.com' + (child.find('a')).get('href')
 
-                    res = await self.get_full_data(description_of_the_location_URL)
+                        res = await self.get_full_data(description_of_the_location_URL)
 
-                    new_location_dictionary['full_data'] = res[0]
+                        new_location_dictionary['full_data'] = res[0]
 
-                    new_location_dictionary['map'] = res[1]
+                        new_location_dictionary['map'] = res[1]
 
+                        new_location_dictionary['Where'] = where_Is 
 
-                    new_location_dictionary['Where'] = where_Is 
+                        self.data.append(new_location_dictionary)
 
-                    self.data.append(new_location_dictionary)
+                        
+                        await asyncio.sleep(1)
 
-                    
-                    await asyncio.sleep(1)
-
-                except AttributeError as e:
-                    continue
-
+                    except AttributeError as e:
+                        continue
+            except Exception as e:
+                print('Error on the data: ' , e)
+                return
+        
             # save the data in the firestore :)
             try:
                 from ..Firebase.firebase import add_content_to_firestore
@@ -138,7 +144,25 @@ class Scraper:
         # get the full data data 
         full_data = data_location_html_file.find('div' , class_ = 'readMore_content__bv7mp').text
         # get url to the location of the 
-        location = (data_location_html_file.find('p' , class_ = 'text-md lg:text-lg mb-4 lg:mb-0').a).get('href')
+        datas = (data_location_html_file.find('div' , class_ = 'mb-10 lg:w-2/3'))
+
+        web = None
+        location = None
+        for data in datas.contents:
+            try:
+                location = data.p.a.get('href')
+
+                if 'www' in location:
+                    web = location
+
+                if 'google' in location:
+                    break
+                elif web is not None:
+                    location = web
+            
+            except Exception as e:
+                continue    
+
                     
         return [full_data, location]
     
