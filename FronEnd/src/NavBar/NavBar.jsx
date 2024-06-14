@@ -6,20 +6,19 @@ import { auth, db } from '../Firebase/firebase';
 import {signOut} from 'firebase/auth'
 import { collection, query, where, getDocs} from 'firebase/firestore'
 
-import logo_img from './Images/Logo.jpeg'
-
-import user_white_offline from './Images/User_White_Offline.png'
-import user_green_offline from './Images/User_Green_Offline.png'
-
-import login_boy from './Images/User_Login_boy.png'
-import login_girl from './Images/User_Login_girl.png'
-
 import Img_Hover from '../component/Img_Hover'
 
 import './navBar.css'
-// TODO make the img of the login to change between the girl or boy or changed between login or not IMPORTANT
+
+import logo_img from './Images/Logo.jpeg'
+
 // make a Navbar Html
 function NavBar(){
+    const user_white_offline = 'https://cdn-icons-png.freepik.com/512/152/152533.png?ga=GA1.1.940078363.1718183127'
+    const user_green_offline = 'https://cdn-icons-png.freepik.com/512/248/248928.png?ga=GA1.1.940078363.1718183127'
+
+    const login_boy = 'https://cdn-icons-png.freepik.com/512/2822/2822323.png'
+    const login_girl = 'https://cdn-icons-png.freepik.com/512/2822/2822329.png'
 
     const navigate = useNavigate();
 
@@ -28,7 +27,6 @@ function NavBar(){
     const handleNavBarIconClicked = () => {
         setIsNavBarClicked(!isNavBarClicked)
     }
-
 
     // function to handle if the trend in the same page or not
     const scrollToSection = (event) => {
