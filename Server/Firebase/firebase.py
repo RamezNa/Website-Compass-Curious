@@ -137,7 +137,7 @@ async def get_information_and_img(location,days):
         data = await scraper_engin.search_google(location)
         url = None
         while url is None:
-            url = await scraper_engin.get_img_pintrest(location)
+            url = await scraper_engin.get_img_pintrest(location, ' city')
             if url is None:
                 await asyncio.sleep(5)        
 

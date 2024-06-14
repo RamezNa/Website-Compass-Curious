@@ -90,7 +90,7 @@ class Scraper:
                         new_location_dictionary['img'] = await self.resize_image_url(url_img, 1920, 1920)
                         # TODO if the image from lonelyplanetstatic find new image
                         if 'lonelyplanetstatic' in new_location_dictionary['img']:
-                            new_location_dictionary['img'] = await self.get_img_pintrest(new_location_dictionary['name'])
+                            new_location_dictionary['img'] = await self.get_img_pintrest(new_location_dictionary['name'], (' ' + type_of_location))
                                             
                         # define the data of the location
                         new_location_dictionary['data'] = child.find('p' , class_ = 'line-clamp-2' ).text
@@ -177,8 +177,8 @@ class Scraper:
             print("we have EROR :(", e)
 
     # function that get from the pintrest img that descripe the location
-    async def get_img_pintrest(self,location):
-        URL = 'https://www.pinterest.com/search/pins/?q=' + location + ' city'
+    async def get_img_pintrest(self, location, descripe):
+        URL = 'https://www.pinterest.com/search/pins/?q=' + location + descripe
 
         try:
             text_BS = await self.get_html_file_fast(URL)
