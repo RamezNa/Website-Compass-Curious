@@ -6,7 +6,7 @@
 }
 
 .container_MP .search{
-    background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_1.jpg');
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.92) ,rgba(28, 110, 90, 0.92) ), url('https://images.pexels.com/photos/592753/pexels-photo-592753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-position: center;
     background-size: cover;
     max-width:100vw;
@@ -51,7 +51,7 @@
 .container_MP .search .content form .container_submit input{
     height: 4rem;
     border-radius: 7rem;
-    background-color: #1f4037cc;
+    background-color: #101c19cc;
     border: none;
     font-family: inherit;
     font-size: 2.5rem;
@@ -94,7 +94,7 @@ input[type='number'] {
     width: 2rem;
     height: 2rem;
     transform: translateX(3.5rem);
-    opacity: 0.6;
+    filter: invert(45%);
 }
 
 .container_MP .search .content form .container_submit .btn_submit{
@@ -104,20 +104,20 @@ input[type='number'] {
 }
 
 .container_MP .search .content form .container_submit .btn_submit .icon_go{
-    width: 5rem;
-    height: 5rem;
-    transition: .3s linear;
+    width: 7rem;
     cursor: pointer;
+    filter: invert(100%);
+
 }
 
-.container_MP .search .content form .container_submit .icon_go:hover{
-    transform: scale(1.1);
+.container_MP .search .content form .container_submit .icon_go:hover{   
+    filter: invert(0%);
+
 }
 
 .container_MP .trend{
-    background-image: linear-gradient(to right, #1f4037cb ,#99F2C8cb ), url('./Images/bg_2.jpg');
+    background-image: linear-gradient(to right, rgba(31, 64, 55, 0.92) ,rgba(28, 110, 90, 0.92) ), url('https://images.unsplash.com/photo-1498354178607-a79df2916198?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-position: center;
-    /* background-size: cover; */
     max-width:100vw;
     padding-top: 7rem;
     text-align: center;
@@ -137,6 +137,13 @@ input[type='number'] {
 .container_MP .trend .subTitle{
     font-size: 2.3rem;
     padding-bottom: 6rem;
+}
+
+.container_MP .trend .loading{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    filter: grayscale(120) opacity(0.1) ;
 }
 
 .container_MP .trend .container_trend{
@@ -285,10 +292,16 @@ input[type='number'] {
         font-size: 6.5rem;
         transform: translateY(-5rem);
     }
+
     
     .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .container_days .number_days{
         font-size: 5.5rem;
-        transform: translateY(-5.6rem);
+        transform: translateY(-4rem);
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .container_days .icon{
+        font-size: 4.5rem;
+        transform: translateY(-4rem);
     }
     
     .container_MP .trend .container_trend .description{
@@ -359,9 +372,14 @@ input[type='number'] {
         transform: translateY(-4rem);
     }
     
-    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .container_days .number_days{
         font-size: 4.5rem;
-        transform: translateY(-4.6rem);
+        transform: translateY(-2.6rem);
+    }
+
+    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .container_days .icon{
+ 
+        transform: translateY(-2.6rem);
     }
 
 }
@@ -391,15 +409,5 @@ input[type='number'] {
 
     .container_MP .trend .subTitle{
         font-size: 2rem;
-    }
-
-    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .name_location{
-        font-size: 4.2rem;
-        transform: translateY(-2.5rem);
-    }
-    
-    .container_MP .trend .container_trend .container_img_and_number .container_img .aligment .number_days{
-        font-size: 3rem;
-        transform: translateY(-2.5rem);
     }
 }

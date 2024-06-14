@@ -6,16 +6,16 @@ import './mainPage.css'
 import Img_Hover from '../component/Img_Hover'
 import Box_Img_Description from './component/Box_Img_Desciption';
 
-import sumbit_answer_w from './Images/lets-go_w.png'
-import sumbit_answer_g from './Images/lets-go_g.png'
-
-import icon_search from './Images/search.png'
-
 import { db } from '../Firebase/firebase'
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
 
 function MainPage(){
+
+    const sumbit_answer_w = 'https://cdn-icons-png.freepik.com/512/5486/5486234.png?ga=GA1.1.940078363.1718183127'
+    const sumbit_answer_g = 'https://cdn-icons-png.freepik.com/512/5486/5486216.png?ga=GA1.1.940078363.1718183127'
+
+    const icon_search = 'https://cdn-icons-png.freepik.com/512/57/57477.png?ga=GA1.1.940078363.1718183127'
 
     const navigate = useNavigate()
 
@@ -43,9 +43,15 @@ function MainPage(){
         
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         // TODO check that the location is valid :)
         event.preventDefault()
+         // sent to server to update trend
+         try{
+            await fetch(`${server}/trend/${location}/${numdays}`)
+        }catch (error) {
+            console.error("Error fetching from server: ", error)
+        }
         navigate('/Suggestion', {state: {location: (location.trim().toLowerCase()),numdays: days }})
     }
 
@@ -100,11 +106,10 @@ function MainPage(){
                 <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
                 {/* TODO Check witch one to choice for loading */}
                 {isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> }
-                {/* TODO make the days ( array / list ) in firestore and in the code recived array desine it and : */}
-                {/* TODO make arrow to move bettween the days and make animation when move right or left */}
                 {/* TODO make when click on the day it make a suggestion for me by the day that choice and the location */}
 
-                {listOfTrends.map( (trend,index) => (
+                { listOfTrends.length == 0 ? <h3>-ˏˋ⋆ No one has searched yet. Be the first to discover trending destinations with Compass Curious Explorers! ⋆ˊˎ- </h3>:
+                listOfTrends.map( (trend,index) => (
                     <Box_Img_Description class_={ (index % 2 == 0 ) ? 'left' : 'right'} number={index + 1} number_of_days={trend.days}  name_location={trend.location}  description={trend.description} url={trend.url} key={index}/> 
                 ) )}
             </div>   
