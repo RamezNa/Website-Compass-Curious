@@ -3,7 +3,7 @@
     min-height: 5rem;
     margin-left: 10%; 
     background-color: #244d42f0 ;/*1f4037cc*/
-    border-radius: 0px 0px 65px 65px;
+    border-radius: 0px 0px 4rem 4rem;/* 0px 0px 65px 65px;*/
     position:  fixed  ;
     z-index: 3;
 }
@@ -27,8 +27,13 @@
     height: 5rem;
 }
 
+.nav_bar .container_nav_bar li:first-child{
+    padding-left: 0rem;
+}
+
 .nav_bar .container_nav_bar li:last-child{
    border-right: none;
+   padding-right: 0rem;
 }
 
 .nav_bar .container_nav_bar li img:hover, .nav_bar .container_nav_bar li .href_text:hover{
@@ -49,6 +54,7 @@
 .nav_bar .container_nav_bar li .login_img{
     filter: invert(100%); 
     transition: 0.1s; 
+    
 }
 
 .nav_bar .container_nav_bar li .login_img:hover{
@@ -66,24 +72,31 @@
     text-shadow: 2px 2px 8px #00000071;   
 }
 
-.nav_bar .LogOut{
+.nav_bar .container_nav_bar li:nth-child(4){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.nav_bar .container_nav_bar li .LogOut{
+    width: max-content;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     color: #a4ffcc;
-    transform: translateX(68vw) translateY(-1rem);
-    position: absolute;
     transition: 0.3s;
+    transform: translateY(-1rem);
+    z-index: 4;
 }
 
-.nav_bar .LogOut:hover{
+.nav_bar .container_nav_bar li .LogOut:hover{
     color: #e63333;
-    transform: translateX(68vw) translateY(-1rem) scale(1.05);
 }
 
 @media (min-width: 4042px) {
     :root{
-        font-size: 55px;
+        font-size: 52px;
     }
     
 }
@@ -105,7 +118,7 @@
 
 @media (max-width: 2200px) {
     :root{
-        font-size: 26px;
+        font-size: 25px;
     }
     
 }
@@ -257,8 +270,11 @@
         margin-bottom:0rem;
     }
 
-    .nav_bar .LogOut{
-        transform: translateX(10vw) translateY(3.4rem) rotate(0deg);
+    .nav_bar .container_nav_bar li:nth-child(4){
+        align-items: start;
+    }
+
+    .nav_bar .container_nav_bar li .LogOut{
         font-size: 3rem;
     }
 
@@ -290,10 +306,6 @@
 
     .clicked_btn{
         transform: translateX(45vw);
-    }
-    .nav_bar .LogOut{
-        transform: translateX(15vw) translateY(3.4rem) rotate(0deg);
-
     }
 }
 

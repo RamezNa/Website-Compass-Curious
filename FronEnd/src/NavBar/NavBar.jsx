@@ -60,6 +60,7 @@ function NavBar(){
       const [gend,setGend] = useState('')
 
       const Logout = async () => {
+        // TODO ask if he want to log out or no :)
         try {
             await signOut(auth)
             setGend('')
@@ -89,7 +90,7 @@ function NavBar(){
         return () => unsubscribe();
 
       }, [])
-
+    
     return <>
     <div className={!isNavBarClicked ? 'show_unshow_navbar' : 'show_unshow_navbar clicked_btn'} onClick={handleNavBarIconClicked}>
         <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
@@ -111,13 +112,14 @@ function NavBar(){
                 <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>
             </li>
             <li >
+                {/* TODO Add Loading to img */}
                 <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } >
                     <Img_Hover url_hovered={ (auth?.currentUser?.email == undefined) ? user_green_offline : null } url_unHovered={ (auth?.currentUser?.email == undefined) ? user_white_offline : ( (gend == 'male') ? login_boy :login_girl )  } class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
                 </Link>
-               
+                {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={Logout}>✧ LogOut ✧</p>   }
             </li>
         </ul> 
-        {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={Logout}>✧ LogOut ✧</p>   }
+        
         
     </nav>
 
