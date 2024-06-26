@@ -46,6 +46,10 @@
     transition: .5s;
 }
 
+.nav_bar .container_nav_bar li .loading{
+    filter: grayscale(120) opacity(0.1);
+}
+
 .nav_bar .container_nav_bar li .logo_img, .nav_bar .container_nav_bar li .login_img{
     border-radius: 50%;
     padding-top: 0.1em;
@@ -322,3 +326,23 @@
         transform: translateX(55vw);
     }
 }
+
+/* desine the scroll bar */
+::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #2ECC71;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ffffff;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+  }
