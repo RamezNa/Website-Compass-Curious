@@ -1,13 +1,29 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { db } from "../../Firebase/firebase"
+import { where, query, getDocs, collection } from "firebase/firestore"
 
-function Location( {url, nameLocation,numDays} ){
+function Location( {nameLocation,numDays} ){
 
     const [isLoading, setIsLoading] = useState(false)
+    const [url, setUrl] = useState('')
+
+
+    useEffect( () =>{
+        const start = async() =>{
+            const q = query( collection(db , '_trend'), where('location', '==', nameLocation ) )
+            const querySnapshot = await getDocs(q)
+            setUrl(querySnapshot.docs[0].data().url)
+            setIsLoading(true)
+        }
+
+        start()
+    }, [])
 
     return(
         <div className="data">
-            {!isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/>}
-            <img className="img" src={url} alt={nameLocation} onLoad={() => setIsLoading(true)}  />
+            {!isLoading ? <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/>:
+            <img className="img" src={url} alt={nameLocation} />
+            }
             <div className="aligment">
                 <h3 className="name_location">{nameLocation}</h3>
                 <p className="num_day">{numDays} {numDays > 1 ? 'Days' : 'Day'} </p>
