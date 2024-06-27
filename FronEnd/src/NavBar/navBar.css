@@ -6,6 +6,20 @@
     border-radius: 0px 0px 4rem 4rem;/* 0px 0px 65px 65px;*/
     position:  fixed  ;
     z-index: 3;
+    animation: fadeDown 1.2s linear;
+}
+
+@keyframes fadeDown {
+    from{
+        opacity: 0;
+        transform: translateY(-12vw);
+        scale: 0.2;
+    }to{
+        opacity: 1;
+        transform: translateY(0vw);
+        scale: 1;
+    }
+    
 }
 
 .nav_bar .container_nav_bar{
