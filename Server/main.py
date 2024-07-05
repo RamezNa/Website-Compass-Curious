@@ -7,12 +7,14 @@ import signal
 import multiprocessing
 # from flask_cors import CORS
 
+#TODO make the server return to the ip and say to him that we finished the search
+#TODO make the scrapper work Faster its take more than i expected from the time 
 
 app = Flask(__name__)
 # CORS(app)
 @app.after_request
 def add_cors_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')#TODO cahnge this to the name of the server
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
     return response
@@ -39,28 +41,28 @@ async def make_trend(location , day):
 tasks = {}
 
 # this function is worked to fetch data from the website only depend on the location
-async def async_work(location):
+async def async_work(location, days):
     # make the search start in here function
-    await is_in_firestore(location)
+    await is_in_firestore(location, days)
     # remove the task 
     tasks.pop(location)
 
 # this function is help me to make the function work in thread
-def start_me(location):
+def start_me(location, days):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(async_work(location))
+    loop.run_until_complete(async_work(location, days))
 
     
 # Route to get a data of location
-@app.route('/suggestion_by_day/<string:location>', methods=['GET'])
-async def get_suggestion(location):
+@app.route('/suggestion_by_day/<string:location>/<int:days>', methods=['GET'])
+async def get_suggestion(location, days):
     # check if the location in the tasks
     # if the location in the task return that the server work on it else make anew search
     if location in tasks:
         return 'Please wait while we determine your location.',202
     tasks[location] = {'status': 'running'}
-    proces = multiprocessing.Process(target=start_me, args=(location,))
+    proces = multiprocessing.Process(target=start_me, args=(location, days))
     proces.start()  
     return 'We are conducting the search.', 202
 
