@@ -21,21 +21,19 @@ function History(){
 
                 if( email_user == undefined ){
                     navigate('/')
+                    window.scrollTo(0, 0);
                 }
 
-                const q = query(collection(db, '_users'), where('email', '==', email_user));
-                const querySnapshot = await getDocs(q);
-                console.log(querySnapshot.docs[0].data().history)   
+                const q = query(collection(db, '_users'), where('email', '==', email_user))
+                const querySnapshot = await getDocs(q)
                 setListOfHistory(querySnapshot.docs[0].data().history)
                 setIsLoading(true)
 
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }  
-        });
-       
-         return () => unsubscribe();
-
+        })
+        return () => unsubscribe()
       }, [])
 
 return(
@@ -50,9 +48,13 @@ return(
         {!isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/>}
         <div className="container_data">
             {/* TODO make when clicked moved to page suggestion and load the suggestion */}
-            {listOfHistory.map( (loc,index) =>(
-                <Location url={loc.url} nameLocation={loc.location} numDays={loc.days} key={index} />
-            ) )}
+            {   
+                listOfHistory.length == 0 && isLoading ? <h3 className='no_history'> -ˏˋ⋆ No locations saved yet. Explore new destinations that speak to your interests! ⋆ˊˎ- </h3> : 
+                listOfHistory.map( (loc,index) =>(
+                    <Location url={loc.url} nameLocation={loc.location} numDays={loc.days} dataLocation={loc.whatDoing} key={index} />
+                ) )
+            }
+            
         </div>
     </div>
 )

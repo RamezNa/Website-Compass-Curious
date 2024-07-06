@@ -9,7 +9,6 @@
     align-items: center;  
 }
 
-
 .history .header{
     display: flex;
     flex-direction: row;
@@ -38,6 +37,7 @@
     text-transform: capitalize;
     margin-bottom: 4rem;
     line-height: 5rem;
+    text-align: center;
 }
 
 .history .line{
@@ -62,12 +62,34 @@
     filter: grayscale(120) opacity(0.1);
 }
 
+.history .container_data .no_history{
+    text-align: center;
+}
+
 .history .container_data .data{
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    animation: fadeFromBootom linear;
+    animation-timeline: view();
+    animation-range-start: -2rem ;
+    animation-range-end: 13rem;
     transition: .5s;
+    width: fit-content;
+}
+
+@keyframes fadeFromBootom {
+    from{
+        opacity: 0;
+        scale: .7;
+        transform: translateY(4rem);
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+        transform: translateY(0rem);
+    }
 }
 
 .history .container_data .data:hover{
@@ -83,6 +105,7 @@
 
 .history .container_data .data .img{
     width:20rem;
+    max-height: 13rem;
     border-radius: 2rem 2rem 0rem 0rem;
     box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, 0.4);
 }
