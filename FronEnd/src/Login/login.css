@@ -13,14 +13,12 @@
     align-items: center;
     color: #ffffff;
     background-repeat: no-repeat;
-    
 }
 
 .login .container_left{
     background-image: linear-gradient(to right, rgba(31, 64, 55, 0.85) ,rgba(28, 110, 90, 0.85) ), url('https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-position: right;
     background-size: 80rem;
-    
 }
 
 .signUp .container_left{
@@ -42,12 +40,27 @@
     margin-bottom: 2rem;
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
     text-transform: capitalize;
+    animation: cameFromLeft 1s linear;
 }
 
 .login .container_left .subTitle, .forget .container_left .subTitle, .signUp .container_left .subTitle{
     margin-bottom: auto;
     text-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.3);
     text-transform: capitalize;
+    animation: cameFromLeft 1.2s linear;
+}
+
+@keyframes cameFromLeft {
+    from{
+        opacity: 0;
+        scale: 0.4;
+        transform: translateX(-60rem);
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+        transform: translateX(0rem);
+    }
 }
 
 .login .container_left .subTitle{
@@ -87,6 +100,7 @@
     transition: .4s;
     cursor: pointer;
     font-weight: 800;
+    animation: cameFromMiddle 0.65s ease-in-out;
 }
 
 .signUp .container_right .container_back .icon_circule:hover, .forget .container_right .container_back .icon_circule:hover{
@@ -96,6 +110,7 @@
 .login .container_right .title, .forget .container_right .container_back .title ,.signUp .container_right .container_back .title{
     font-weight: 500;
     margin-bottom: 2rem;
+    animation: cameFromMiddle 0.6s ease-in-out;
 }
 
 .login .container_right .title{
@@ -115,6 +130,7 @@
     width: 19.8rem;  
     padding-bottom: 2rem;
     font-size: 1.2rem;
+    animation: cameFromMiddle 0.65s ease-in-out;
 }
 
 .login .container_right .description .clickable{
@@ -132,6 +148,7 @@
 .login .container_right .login_form, .signUp .container_right .signIn_form, .forget .container_right .forget_form{
     display: flex;
     flex-direction: column;
+    animation: cameFromMiddle 0.75s ease-in-out;
 }
 
 .login .container_right .login_form .label_for_box, .signUp .container_right .signIn_form .label_for_box, .forget .container_right .forget_form .label_for_box{
@@ -225,6 +242,19 @@
     margin-bottom: 0.5rem;
 }
 
+@keyframes cameFromMiddle {
+    from{
+        opacity: 0;
+        scale: 0.4;
+        /* transform: translateX(20rem); */
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+        /* transform: translateX(0rem); */
+    }
+}
+
 @media (max-width: 700px) {
 
     .login .container_left, .signUp .container_left, .forget .container_left{
@@ -257,6 +287,7 @@
 
     .signUp .container_right .container_back .icon_circule, .forget .container_right .container_back .icon_circule{
         font-size: 5.5rem;
+
     }
 
     .login .container_right .description{

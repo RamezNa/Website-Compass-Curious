@@ -14,6 +14,7 @@ function SignUp(){
         event.preventDefault()
         // move to the Login page
         navigate('/Login')
+        window.scrollTo(0, 0);
     }
 
     const[email,setEmail] = useState('')
@@ -39,6 +40,7 @@ function SignUp(){
             await setDoc(doc(db, '_users',user.uid),{email: user.email, gender: selectedOption,history: []})
             // move to the Main page
             navigate('/') 
+            window.scrollTo(0, 0);
         } catch (error) {
             setError_message(error.message)
             console.error('Error during sign-in:', error);
@@ -51,6 +53,7 @@ function SignUp(){
             try {
                 if( auth?.currentUser?.email != undefined ){
                     navigate('/')
+                    window.scrollTo(0, 0);
                 }
                  
             } catch (error) {

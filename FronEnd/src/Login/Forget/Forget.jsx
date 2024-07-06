@@ -9,6 +9,7 @@ function Forget(){
     const handleNav = (event) => {
         event.preventDefault()
         navigate('/Login')
+        window.scrollTo(0, 0);
     }
 
     const[email,setEmail] = useState('')
@@ -19,6 +20,7 @@ function Forget(){
         try {
            await sendPasswordResetEmail(auth,email) 
            navigate('/Login')//navigate('/') TODO check if we need to move to login page or the main  
+           window.scrollTo(0, 0);
         } catch (error) {
             setError_message(error.message)
             console.error(error)
@@ -31,6 +33,7 @@ function Forget(){
             try {
                 if( auth?.currentUser?.email != undefined ){
                     navigate('/')
+                    window.scrollTo(0, 0);
                 }
                  
             } catch (error) {

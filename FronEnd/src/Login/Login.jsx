@@ -22,11 +22,13 @@ function Login(){
     const handleMoveSignInPage = (event) =>{
         event.preventDefault()
         navigate('/SignUp')
+        window.scrollTo(0, 0);
     }
 
     const handleMoveForgetPage = (event) =>{
         event.preventDefault()
         navigate('/Forget')
+        window.scrollTo(0, 0);
     }
 
     const handleLogin = async (event) => {
@@ -34,6 +36,7 @@ function Login(){
         try{
             await signInWithEmailAndPassword(auth,email,password)
             navigate('/')
+            window.scrollTo(0, 0);
         }catch(error){
             setError_message(error.message)
             console.error(error)
@@ -45,6 +48,7 @@ function Login(){
             try {
                 if( auth?.currentUser?.email != undefined ){
                     navigate('/')
+                    window.scrollTo(0, 0);
                 }
                  
             } catch (error) {
