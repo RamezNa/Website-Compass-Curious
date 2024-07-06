@@ -1,7 +1,27 @@
 import { useState } from "react"
-// TODO when click on the component make to me the suggestion with the number_of_days and name_location :)
-function Box_Img_Description({class_, number ,number_of_days, name_location, description, url }){
+
+import { useNavigate } from 'react-router-dom';
+
+// when click on the component make to me the suggestion with the number_of_days and name_location :)
+function Box_Img_Description({class_, number ,number_of_days, name_location, description, url, server  }){
+
     const [select, setSelect] = useState(0)
+
+    const navigate = useNavigate()
+
+    const handle_new_suggestion = async () =>{
+
+        try{
+            fetch(`${server}/trend/${name_location}/${number_of_days[select]}`)
+            .then(data => {
+                console.log(data);
+            })
+        }catch (error) {
+            console.error("Error fetching from server: ", error)
+        }
+        navigate('/Suggestion', {state: {location: (name_location), numdays: number_of_days[select], isHistory: false , data_: [] }})
+        window.scrollTo(0, 0);
+    }
     
     return(
         <>
@@ -14,10 +34,10 @@ function Box_Img_Description({class_, number ,number_of_days, name_location, des
                 <div className="container_img">
                     <img className='img_location' src={url} alt={name_location} />
                     <div className="aligment">
-                        <h1 className='name_location'>{name_location}</h1>
+                        <h1 className='name_location' onClick={handle_new_suggestion} >{name_location}</h1>
                         <div className="container_days">
                             {select == 0 ? <></> : <span className="icon" onClick={() => setSelect(select-1)}>↜</span>}
-                            <h2 className='number_days'>{number_of_days[select]} Days</h2>
+                            <h2 className='number_days' onClick={handle_new_suggestion} >{number_of_days[select]} Days</h2>
                             {select < number_of_days.length-1  ? <span className="icon" onClick={() => setSelect(select+1)}>↝</span> : <></> }
                         </div> 
                     </div>
