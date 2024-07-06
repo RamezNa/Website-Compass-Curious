@@ -1,17 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask
 from .Firebase.firebase import *
 from asgiref.wsgi import WsgiToAsgi
 import asyncio
 import uvicorn
 import signal
-import multiprocessing
-# from flask_cors import CORS
 
 #TODO make the server return to the ip and say to him that we finished the search
 #TODO make the scrapper work Faster its take more than i expected from the time 
 
 app = Flask(__name__)
-# CORS(app)
+
+task_trend = {}
+
 @app.after_request
 def add_cors_headers(response):
     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')#TODO cahnge this to the name of the server
@@ -33,8 +33,7 @@ def start_trend(location, day):
 # route to update the firebase and get data and img from the google and pitrest :)
 @app.route('/trend/<string:location>/<int:day>', methods=['GET'])
 async def make_trend(location , day):
-    proces = multiprocessing.Process(target=start_trend, args=(location, day))
-    proces.start()
+    asyncio.create_task(async_trend(location, day))
     return 'Successful', 200
 
 # this variable is saved the task that i do in the search engine
@@ -61,9 +60,8 @@ async def get_suggestion(location, days):
     # if the location in the task return that the server work on it else make anew search
     if location in tasks:
         return 'Please wait while we determine your location.',202
-    tasks[location] = {'status': 'running'}
-    proces = multiprocessing.Process(target=start_me, args=(location, days))
-    proces.start()  
+    tasks[location] = {'status': 'running'}  
+    asyncio.create_task(async_work(location, days))
     return 'We are conducting the search.', 202
 
 
@@ -74,18 +72,40 @@ def handle_signal(server):
     print('Graceful shutdown initiated...')
     server.should_exit = True
 
-# Our main Server :)
-if __name__ == '__main__':
-
+# Define a main coroutine to run the server
+async def main():
     config = uvicorn.Config(asgi_app, host='0.0.0.0', port=8000)
     server = uvicorn.Server(config)
 
     # Register signal handlers
-    signal.signal(signal.SIGINT, lambda sig, frame: handle_signal(server))
-    signal.signal(signal.SIGTERM, lambda sig, frame: handle_signal(server))
-    
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        loop.add_signal_handler(sig, lambda sig=sig: handle_signal(server))
+
     try:
-        server.run()
-    except KeyboardInterrupt:
+        await server.serve()
+    except asyncio.CancelledError:
         print("Server stopped by user")
+
+# Our main Server :)
+if __name__ == '__main__':
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Server stopped by user")    
+
+# Our main Server :)
+# if __name__ == '__main__':
+
+#     config = uvicorn.Config(asgi_app, host='0.0.0.0', port=8000)
+#     server = uvicorn.Server(config)
+
+#     # Register signal handlers
+#     signal.signal(signal.SIGINT, lambda sig, frame: handle_signal(server))
+#     signal.signal(signal.SIGTERM, lambda sig, frame: handle_signal(server))
+    
+#     try:
+#         server.run()
+#     except KeyboardInterrupt:
+#         print("Server stopped by user")
 

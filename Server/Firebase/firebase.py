@@ -7,6 +7,7 @@ import os
 import asyncio
 from ..Scrapping.search import Scraper
 
+
 # Get the Relative path to the 'key.json' file
 key_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'key.json'))
 
@@ -30,7 +31,7 @@ async def add_content_to_firestore(collection_name , list_of_data):
 
 
 #function that check if the collection is in the firestore
-async def is_in_firestore(collection_name):
+async def is_in_firestore(collection_name, days):
     
     # get the collection by using the name of the collection
     docs = (
@@ -42,7 +43,7 @@ async def is_in_firestore(collection_name):
     if not any(docs):
         # make scrapping to get the data 
         search_for_new_data = Scraper()
-        await search_for_new_data.search(collection_name , ['attractions','entertainment'])
+        await search_for_new_data.search(collection_name , days, ['attractions','entertainment'])
         return True
     
     return False
@@ -115,12 +116,14 @@ async def is_in_firestore_trend(location,days):
     # fetch the data from the firestore
     query = db.collection('_trend').where(filter=FieldFilter('location' , '==' , location))
     data = list(query.stream())
+
     # make the data in the 
     if not data:
         await get_information_and_img(location, days)
         return 
     # convert to dictionary
     trend = data[0].to_dict()
+
     # check if the day in the list of days in firestore 
     if days not in trend['days']:
         trend['days'].append(days)
@@ -134,15 +137,18 @@ async def is_in_firestore_trend(location,days):
 async def get_information_and_img(location,days):
     try:
         scraper_engin = Scraper()
+
         data = await scraper_engin.search_google(location)
+
         url = None
         while url is None:
-            url = await scraper_engin.get_img_pintrest(location, ' city')
+            url = await scraper_engin.get_img_pintrest(location, ' city', ' ')
             if url is None:
-                await asyncio.sleep(5)        
+                await asyncio.sleep(1)        
 
         data_to_save = [{'location':location, 'days':[days], 'description': data, 'url': url,'numTrend': 1 }]
         await add_content_to_firestore('_trend', data_to_save)
+
     except Exception as e:
         print("Error getting document IDs:", e) 
 
