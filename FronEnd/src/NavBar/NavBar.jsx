@@ -65,6 +65,7 @@ function NavBar(){
             await signOut(auth)
             setGend('')
             navigate('/')
+            window.scrollTo(0, 0);
         } catch (error) {
             console.error(error)
         }
@@ -115,11 +116,11 @@ function NavBar(){
                 <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>
             </li>
             <li >
-                <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } >
+                <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } onClick={handleNavBarIconClicked} >
                     {isLoading ? <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> :
                     <Img_Hover url_hovered={ (auth?.currentUser?.email == undefined) ? user_green_offline : null } url_unHovered={ (auth?.currentUser?.email == undefined) ? user_white_offline : ( (gend == 'male') ? login_boy :login_girl )  } class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
                     }
-                    </Link>
+                </Link>
                 {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={Logout}>✧ LogOut ✧</p>   }
             </li>
         </ul> 
