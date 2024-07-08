@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { db } from "../../Firebase/firebase"
 import { where, query, getDocs, collection } from "firebase/firestore"
 
-
 // TODO add field to the id of the data 
 function Location( {nameLocation, numDays, dataLocation} ){
 
