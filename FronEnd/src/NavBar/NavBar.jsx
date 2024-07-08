@@ -26,6 +26,7 @@ function NavBar(){
 
     const handleNavBarIconClicked = () => {
         setIsNavBarClicked(!isNavBarClicked)
+        window.scrollTo(0, 0)
     }
 
     // function to handle if the trend in the same page or not
@@ -58,13 +59,16 @@ function NavBar(){
       };
 
       const [gend,setGend] = useState('')
+      const [displaySureLogout, setDisplaySureLogout] = useState(false)
+
 
       const Logout = async () => {
-        // TODO ask if he want to log out or no :)
+        
         try {
             await signOut(auth)
             setGend('')
             navigate('/')
+            setDisplaySureLogout(false)
             window.scrollTo(0, 0);
         } catch (error) {
             console.error(error)
@@ -72,6 +76,7 @@ function NavBar(){
       }
 
       const [isLoading,setIsLoading] = useState(true)
+      
 
       useEffect( ()=>{
 
@@ -96,37 +101,53 @@ function NavBar(){
       }, [])
     
     return <>
-    <div className={!isNavBarClicked ? 'show_unshow_navbar' : 'show_unshow_navbar clicked_btn'} onClick={handleNavBarIconClicked}>
-        <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
-        <div className={!isNavBarClicked ? 'line' : 'line clicked'}></div>
-        <div className={!isNavBarClicked ? 'line' : 'notLine'}></div>
-    </div>  
-    <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}> 
-        <ul className='container_nav_bar'>
-            <li>
-                <Link to="/" >
-                    <img className='logo_img' src={logo_img} alt="Logo" onClick={handleNavBarIconClicked} />
-                </Link>    
-            </li>
-            <li>
-                {/* <Link to="/" className="href_text" >Main</Link> */}
-                <a className="href_text" href="#Main" onClick={scrollToSection} >Main</a>
-            </li>
-            <li>
-                <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>
-            </li>
-            <li >
-                <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } onClick={handleNavBarIconClicked} >
-                    {isLoading ? <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> :
-                    <Img_Hover url_hovered={ (auth?.currentUser?.email == undefined) ? user_green_offline : null } url_unHovered={ (auth?.currentUser?.email == undefined) ? user_white_offline : ( (gend == 'male') ? login_boy :login_girl )  } class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
-                    }
-                </Link>
-                {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={Logout}>✧ LogOut ✧</p>   }
-            </li>
-        </ul> 
-        
-        
-    </nav>
+        {/* The alert code */}
+        {displaySureLogout ? 
+            <div className="containerAlert">
+                <div className="letterAllert"> 
+                    <h4 class='paragraph'>Are you sure you want to logout?</h4>
+                    <div className='containerYesOrNo'>
+                        <span className='yesIcon' onClick={ Logout }>✔</span>
+                        <span className='noIcon' onClick={ () => setDisplaySureLogout(false)  }>✘</span>    
+                    </div> 
+                </div>
+            </div>
+        :
+            <></>
+        }
+    
+        {/* The Main Code */}
+        <div className={!isNavBarClicked ? 'show_unshow_navbar' : 'show_unshow_navbar clicked_btn'} onClick={handleNavBarIconClicked}>
+            <div className={!isNavBarClicked ? 'line' : 'line clicked'} ></div>
+            <div className={!isNavBarClicked ? 'line' : 'line clicked'}></div>
+            <div className={!isNavBarClicked ? 'line' : 'notLine'}></div>
+        </div>  
+        <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}> 
+            <ul className='container_nav_bar'>
+                <li>
+                    <Link to="/" >
+                        <img className='logo_img' src={logo_img} alt="Logo" onClick={handleNavBarIconClicked} />
+                    </Link>    
+                </li>
+                <li>
+                    {/* <Link to="/" className="href_text" >Main</Link> */}
+                    <a className="href_text" href="#Main" onClick={scrollToSection} >Main</a>
+                </li>
+                <li>
+                    <a className="href_text" href="#Trend" onClick={scrollToSection} >Trend</a>
+                </li>
+                <li >
+                    <Link to={ (auth?.currentUser?.email == undefined) ? "/Login" : "/History" } onClick={handleNavBarIconClicked} >
+                        {isLoading ? <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> :
+                        <Img_Hover url_hovered={ (auth?.currentUser?.email == undefined) ? user_green_offline : null } url_unHovered={ (auth?.currentUser?.email == undefined) ? user_white_offline : ( (gend == 'male') ? login_boy :login_girl )  } class_name={'login_img'} alt_name={"Login"} onClick={handleNavBarIconClicked} />
+                        }
+                    </Link>
+                    {(auth?.currentUser?.email != undefined) && <p className='LogOut' onClick={() => setDisplaySureLogout(true) }>✧ LogOut ✧</p>   }
+                </li>
+            </ul> 
+            
+            
+        </nav>
 
     </>
 }

@@ -1,3 +1,81 @@
+/* design the letter alert */
+.containerAlert{
+    width: 100vw ;
+    height: 100vh;
+    position: fixed;
+    background-color: #444444a8;
+    z-index: 5;
+    animation: FadeIn 1s ease;
+    color: #000;
+}
+
+@keyframes FadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+    
+}
+
+.containerAlert .letterAllert{
+    width: 50vw;
+    left: 23vw;
+    top: 40vh;
+    position: fixed;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    background-color: #ffffff;
+    z-index: 5;
+    text-align: center;
+    animation: ScaleIn 1.25s ease;
+}
+
+@keyframes ScaleIn {
+    from{
+        scale: 0;
+        opacity: 0;
+    }
+    to{
+        scale: 1;
+        opacity: 1;
+    }
+    
+}
+
+.containerAlert .letterAllert .paragraph{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.containerAlert .letterAllert .containerYesOrNo{
+    margin-top: 1rem;
+}
+
+.containerAlert .letterAllert .containerYesOrNo .yesIcon{
+    font-size: 3rem;
+    margin-right: 3rem;
+    cursor: pointer;
+    transition: .2s ease-in-out; 
+}
+
+.containerAlert .letterAllert .containerYesOrNo .yesIcon:hover{
+    color: #2ECC71;
+}
+
+.containerAlert .letterAllert .containerYesOrNo .noIcon{
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: .2s ease-in-out; 
+}
+
+.containerAlert .letterAllert .containerYesOrNo .noIcon:hover{
+    color: #e63333;
+}
+
+/* design the navBar */
 .nav_bar{
     width: 80vw;
     min-height: 5rem;
