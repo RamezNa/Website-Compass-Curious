@@ -2,8 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { db } from "../../Firebase/firebase"
 import { where, query, getDocs, collection } from "firebase/firestore"
-
-// TODO add field to the id of the data 
+ 
 function Location( {nameLocation, numDays, dataLocation} ){
 
     const navigate = useNavigate()
@@ -25,7 +24,7 @@ function Location( {nameLocation, numDays, dataLocation} ){
 
     const handleMoveToSuggestion = () => {
         navigate('/Suggestion', {state: {location: (nameLocation.trim().toLowerCase()), numdays: numDays, isHistory: true, data_: dataLocation }})
-        window.scrollTo(0, 0);
+        window.scrollTo( { top: 0, behavior: 'smooth' } );
     }
 
     return(

@@ -4,22 +4,19 @@ import LocationTrend from './component/LocationTrend'
 import { useEffect,useState } from 'react'
 import { auth,db } from '../Firebase/firebase'
 import { useNavigate } from 'react-router-dom'
-import { collection, query, getDocs, where, deleteDoc, doc, updateDoc,arrayUnion } from 'firebase/firestore';
+import { collection, query, getDocs, where, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
-import API_KEY from './component/giminiApi'
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import {generateText, delay, server} from '../component/setting'
 
 
 function History(){
-    const server = 'http://0.0.0.0:8000'
 
     const navigate = useNavigate()
 
     const [listOfHistory,setListOfHistory] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
-    // Gimini generate section
-    const genAI = new GoogleGenerativeAI(API_KEY);
+    
     const [suggestLocation, setSuggestLocation] = useState([])
     const [isLoadingSug, setIsLoadingSug] = useState(true)
 
@@ -28,26 +25,22 @@ function History(){
         const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         return Array.from({ length }, () => characters[Math.floor(Math.random() * characters.length)]).join('');
     };
+    // TODO check that the name that we resolve from the gimini dont containe ','
+  
 
-    // function that wait to specific time like wait
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));  
-
-    const generateText = async (prompt, querySnapshotUser) => {
+    const handleGenerateText = async (prompt, querySnapshotUser) => {
         // gimini code work to get the respone
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig:{"response_mime_type": "application/json"}})
-        const result = await model.generateContent(prompt)
-        const response = await result.response
-        // convert the string to list json
-        const res = JSON.parse(response.text())
+        
+        const res = generateText(prompt)
 
-        // TODO check if the ',' in the res[index]['name]
+        
         // get the images to the location that i recived  
         const list_location = res[0]['name'] + ',' + res[1]['name'] + ',' + res[2]['name'] + ',' + res[3]['name'] + ',' + res[4]['name']
         const list_description = res[0]['description'] + '^' + res[1]['description'] + '^' + res[2]['description'] + '^' + res[3]['description'] + '^' + res[4]['description']
         const codeGen = generateRandomCode(10)
         try{
 
-            fetch(`${server}/suggestion_based_Love/${codeGen}/${list_location}`)///${list_description}
+            fetch(`${server}/suggestion_based_Love/${codeGen}/${list_location}`)// '/${list_description}' TODO make the sever make all the operation
 
             // wait and after that fetch the data from the firebase 
             let time_wait = 28000
@@ -78,15 +71,14 @@ function History(){
             const documentId = querySnapshot.docs[0].id
             await deleteDoc(doc( db, '_suggestImg', documentId ))
             console.log(value_temp)
-            // TODO save it in the field of the user
+            // save it in the field of the user
             querySnapshotUser.forEach( async (doc) => {
                 const docRef = doc.ref;
                 // Update the document with the new value
                 try {
-                    // TODO check we need to do something else array
                     await updateDoc(docRef, {
                         isChanged: false, // Update isChanged field  
-                        basedLove: value_temp
+                        basedLove: value_temp // Update basedLove field 
                     });
                     setIsLoadingSug(false)
                 } catch (error) {
@@ -110,7 +102,7 @@ function History(){
 
                 if( email_user == undefined ){
                     navigate('/')
-                    window.scrollTo(0, 0);
+                    window.scrollTo( { top: 0, behavior: 'smooth' } );
                 }
 
                 const q = query(collection(db, '_users'), where('email', '==', email_user))
@@ -135,15 +127,15 @@ function History(){
                         }
                         console.log('here the result')
                         console.log(result)
-                        generateText('Could you recommend five cities or countries for me based on my previous searches? My previous searches for ' + result + '.' + 'provide to me the name and some description about city or country. return to me list of json response', querySnapshot)
+                        handleGenerateText('Could you recommend five cities or countries for me based on my previous searches? My previous searches for ' + result + '.' + 'provide to me the name and some description about city or country. return to me list of json response', querySnapshot)
                         console.log('we are in the generatText with data')
                     }else{
 
-                        generateText('Could you recommend five cities or countries for me based on populartie.' + 'provide to me the name and some description about city or country. return to me list of json response', querySnapshot)
+                        handleGenerateText('Could you recommend five cities or countries for me based on populartie.' + 'provide to me the name and some description about city or country. return to me list of json response', querySnapshot)
                         console.log('we are in the generatText without data :(')
                     }
                 }else{
-                    // TODO fetch from the use the data 
+                    // fetch from the use the data 
                     setSuggestLocation( querySnapshot.docs[0].data().basedLove)
                     console.log('we are fetch the data from the firebase')
                     setIsLoadingSug(false)

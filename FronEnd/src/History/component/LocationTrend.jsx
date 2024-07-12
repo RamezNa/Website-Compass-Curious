@@ -11,7 +11,7 @@ function Location( {url, nameLocation, dataLocation} ){
     const handleMoveToSuggestion = () => {
         // TODO check what i need to do for the day when i send to suggestion
         navigate('/Suggestion', {state: {location: (nameLocation.trim().toLowerCase()), numdays: numDays, isHistory: false, data_: dataLocation }})
-        window.scrollTo(0, 0);
+        window.scrollTo( { top: 0, behavior: 'smooth' } );
     }
 
     return(
