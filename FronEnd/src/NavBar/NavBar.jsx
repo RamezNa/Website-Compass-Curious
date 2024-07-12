@@ -26,7 +26,7 @@ function NavBar(){
 
     const handleNavBarIconClicked = () => {
         setIsNavBarClicked(!isNavBarClicked)
-        window.scrollTo(0, 0)
+        window.scrollTo( { top: 0, behavior: 'smooth' } )
     }
 
     // function to handle if the trend in the same page or not
@@ -69,7 +69,7 @@ function NavBar(){
             setGend('')
             navigate('/')
             setDisplaySureLogout(false)
-            window.scrollTo(0, 0);
+            window.scrollTo( { top: 0, behavior: 'smooth' } );
         } catch (error) {
             console.error(error)
         }
@@ -125,7 +125,7 @@ function NavBar(){
         <nav className={!isNavBarClicked ? 'nav_bar hiden_nav_bar' : 'nav_bar'}> 
             <ul className='container_nav_bar'>
                 <li>
-                    <Link to="/" >
+                    <Link to="/Chat" >
                         <img className='logo_img' src={logo_img} alt="Logo" onClick={handleNavBarIconClicked} />
                     </Link>    
                 </li>

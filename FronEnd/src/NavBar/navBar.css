@@ -182,7 +182,7 @@
     cursor: pointer;
     color: #a4ffcc;
     transition: 0.3s;
-    transform: translateY(-1rem);
+    transform: translateY(-1.3rem);
     z-index: 4;
 }
 
