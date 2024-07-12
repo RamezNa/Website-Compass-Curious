@@ -14,7 +14,7 @@ function SignUp(){
         event.preventDefault()
         // move to the Login page
         navigate('/Login')
-        window.scrollTo(0, 0);
+        window.scrollTo( { top: 0, behavior: 'smooth' } );
     }
 
     const[email,setEmail] = useState('')
@@ -37,10 +37,10 @@ function SignUp(){
             const userCond = await createUserWithEmailAndPassword(auth, email, password)
             // save in the firestore the data :)
             const user = userCond.user
-            await setDoc(doc(db, '_users',user.uid),{email: user.email, gender: selectedOption,history: []})
+            await setDoc(doc(db, '_users',user.uid),{email: user.email, gender: selectedOption, history: [], isChanged: true, basedLove:[]})
             // move to the Main page
             navigate('/') 
-            window.scrollTo(0, 0);
+            window.scrollTo( { top: 0, behavior: 'smooth' } );
         } catch (error) {
             setError_message(error.message)
             console.error('Error during sign-in:', error);
@@ -53,7 +53,7 @@ function SignUp(){
             try {
                 if( auth?.currentUser?.email != undefined ){
                     navigate('/')
-                    window.scrollTo(0, 0);
+                    window.scrollTo( { top: 0, behavior: 'smooth' } );
                 }
                  
             } catch (error) {

@@ -323,10 +323,12 @@
     }
 
     .login .container_right .login_form .error_Message, .signUp .container_right .signIn_form .error_Message, .forget .container_right .forget_form .error_Message{
-        width: 40rem;
+        width: 48rem;
         font-size: 2.2rem;
         margin-top: 1rem ;
         margin-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .signUp .container_right .signIn_form .container_gender{
