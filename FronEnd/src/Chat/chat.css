@@ -1,0 +1,144 @@
+.chat{
+    /* width: 85vw; */
+    min-height: 100vh;
+    background-color: rgb(235, 235, 235);
+}
+
+.chat .containerChat{
+    max-height: 70vh;
+    padding: 7rem 6rem 0rem 6rem;
+    font-size: 1.4rem;
+    color: #082012dc;
+    overflow-y: auto;
+
+}
+/* TODO check if i need to put loading or not */
+/* .chat .containerChat .loading{
+    filter: grayscale(120) opacity(0.1);
+} */
+
+.chat .containerChat .userRespone, .chat .containerChat .chatRespone{
+    padding: 1.4rem;
+    background-color: rgb(192, 192, 192) ;
+    border-radius: 1rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+    display: block;
+    box-shadow: 0.1rem 0.1rem 0.4rem #0000002a;
+    line-height: 2.5rem;
+    max-width: 85%;
+}
+
+.chat .containerChat .userRespone{
+    margin-left: auto;
+    animation: fadeFromRight 0.4s ease;
+}
+
+@keyframes fadeFromRight {
+    from{
+        transform: translateX(5vw);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0vw);
+        opacity: 1;
+    }
+}
+
+.chat .containerChat .chatRespone{
+    animation: fadeFromleft 0.4s ease;
+}
+
+@keyframes fadeFromleft {
+    from{
+        transform: translateX(-50vw);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0vw);
+        opacity: 1;
+    }
+}
+
+.chat .containerSend{
+    width: 99.2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    position: absolute;
+    bottom: 0rem;
+    
+}
+
+.chat .containerSend .ask{
+    width: 75vw;
+    padding: 1rem 8rem 1rem 2rem;
+    font-size: 1.6rem;
+    /* transform: translateX(7%); */
+    border-radius: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.2rem solid #082012dc;
+    color:#082012dc;
+}
+
+.chat .containerSend .containerIcons{
+    display: flex;
+    flex-direction: row-reverse;
+    transform: translateX( -8.5vw) translateY(-3.25rem);
+    margin-bottom: -1.5rem;
+    align-items: center;
+}
+
+.chat .containerSend .containerIcons .iconSend, .chat .containerSend .containerIcons .iconNew{
+    font-size: 2rem;
+    color:#062412;   
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.chat .containerSend .containerIcons .iconNew{
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.chat .containerSend .iconSend:hover, .chat .containerSend .containerIcons .iconNew:hover{
+    scale: 1.3;
+    text-shadow: 0.1rem 0.1rem 0.2rem #00000077;
+    color: #0f7439;
+}
+
+@media (max-width:700px){
+    .chat{
+        min-width: 100vw;
+    }
+    .chat .containerChat{
+        font-size: 2.5rem;
+        padding: 10rem 3rem 0rem 3rem;
+    }
+
+    .chat .containerChat .userRespone, .chat .containerChat .chatRespone{
+        border-radius: 2rem;
+    }
+
+    .chat .containerSend .ask{
+        font-size: 2.6rem;
+        padding: 1rem 10rem 1rem 2rem;
+    }
+
+    .chat .containerSend .containerIcons{
+        transform: translateX( -10vw) translateY(-4.9rem);
+    }
+
+    .chat .containerSend .containerIcons .iconSend, .chat .containerSend .containerIcons .iconNew{
+        font-size: 3.6rem;
+        margin-bottom: -2rem;
+    }
+}
+
+@media (max-width:450px){
+
+    .chat .containerSend .ask{
+        width: 70vw;
+    }
+}
