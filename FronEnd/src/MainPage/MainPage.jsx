@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import {server} from '../component/setting'
 import './mainPage.css'
 
 import Img_Hover from '../component/Img_Hover'
-import Box_Img_Description from './component/Box_Img_Desciption';
-
-import { db } from '../Firebase/firebase'
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import Trend from '../Trend/Trend'
 
 
 function MainPage(){
-    const apiUrl = 'https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json';
-
-    const server = ''//http://0.0.0.0:8000
+    const apiUrl = 'https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json'
 
     const sumbit_answer_w = 'https://cdn-icons-png.freepik.com/512/5486/5486234.png?ga=GA1.1.940078363.1718183127'
     const sumbit_answer_g = 'https://cdn-icons-png.freepik.com/512/5486/5486216.png?ga=GA1.1.940078363.1718183127'
@@ -88,17 +82,23 @@ function MainPage(){
     const handleSubmit = async (event) => {
         // TODO check that the location is valid :)
         event.preventDefault()
+        // TODO remove the console.log
+        console.log('i am in handleSubmit')
          // sent to server to update trend
         try{
-            await fetch(`${server}/trend/${location}/${days}`)
+            // TODO check what we can do if we dont have days that we order !
+            fetch(`${server}/trend/${location.trim().toLowerCase()}/${days}`)
+            .then(data => {
+                console.log(data);
+            })
         }catch (error) {
             console.error("Error fetching from server: ", error)
         }
-        navigate('/Suggestion', {state: {location: (location.trim().toLowerCase()),numdays: days }})
+        console.log('i am after handleSubmit')
+        navigate('/Suggestion', {state: {location: (location.trim().toLowerCase()), numdays: days, isHistory: false, data_:[] }})
+        window.scrollTo( { top: 0, behavior: 'smooth' } );
     }
 
-    const [listOfTrends,getListOfTrends] = useState([])
-    const [isLoading,setIsLoading] = useState(true)
 
     const [focused , setFocused] = useState(false)
 
@@ -108,12 +108,6 @@ function MainPage(){
                 // fetch the data of the countries and cities
                 const response = await axios.get(apiUrl)
                 setData_contries_cities(response.data)
-                // get the rend from the firestore
-                const q = query(collection(db, '_trend'), orderBy('numTrend', 'desc'), limit(5))
-                const querySnapshot = await getDocs(q)
-                const trends = querySnapshot.docs.map(doc => doc.data())
-                getListOfTrends(trends)
-                setIsLoading(false)
             } catch (error) {
                 console.error(error)
             }
@@ -150,7 +144,7 @@ function MainPage(){
                         
                         <div className="container_submit">
                             
-                            <input className='day_input' type="number" value={days == 0 ? '' : days } max={maxDay} min={minDay} onChange={changeDays} placeholder='How Much Days' required/>
+                            <input className='day_input' type="number" value={days == 0 ? '' : days } max={maxDay} min={minDay} onChange={changeDays} placeholder='How Many Days' required/>
                             <button type='submit' className='btn_submit'>
                                 <Img_Hover url_hovered={sumbit_answer_g} url_unHovered={sumbit_answer_w} class_name={'icon_go'} alt_name={"submit"} />
                             </button>
@@ -158,18 +152,7 @@ function MainPage(){
                     </form>
                 </div>
             </div>
-            <div className="trend" id='Trend'>
-                
-                <h1 className='title'>Inspired By Travelers</h1>
-                <h2 className='subTitle'>These Destinations Are Trending With Compass Curious Explorers!</h2>
-                
-                {isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/> }
-
-                { listOfTrends.length == 0 && !isLoading ? <h3>-ˏˋ⋆ No one has searched yet. Be the first to discover trending destinations with Compass Curious Explorers! ⋆ˊˎ- </h3>:
-                listOfTrends.map( (trend,index) => (
-                    <Box_Img_Description class_={ (index % 2 == 0 ) ? 'left' : 'right'} number={index + 1} number_of_days={trend.days}  name_location={trend.location}  description={trend.description} url={trend.url} server={server}  key={index}/> 
-                ) )}
-            </div>   
+            <Trend isFromFather={true} /> 
         </div>
         </>
     )

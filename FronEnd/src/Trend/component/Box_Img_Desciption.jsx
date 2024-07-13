@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Box_Img_Description({class_, number ,number_of_days, name_location, description, url, server  }){
 
     const [select, setSelect] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
 
     const navigate = useNavigate()
 
@@ -20,19 +21,20 @@ function Box_Img_Description({class_, number ,number_of_days, name_location, des
             console.error("Error fetching from server: ", error)
         }
         navigate('/Suggestion', {state: {location: (name_location), numdays: number_of_days[select], isHistory: false , data_: [] }})
-        window.scrollTo(0, 0);
+        window.scrollTo( { top: 0, behavior: 'smooth' } );
     }
     
     return(
         <>
-        {/*TODO onClick move to page suggestion*/}
+        {/*onClick we move to page suggestion*/}
         <div className={'container_trend ' + class_} >
             <div className='container_img_and_number'>
                 <div className="container_number">
                     <p className='number'>{number}</p>
                 </div>
                 <div className="container_img">
-                    <img className='img_location' src={url} alt={name_location} />
+                    {isLoading && <img src='https://i.pinimg.com/originals/61/24/16/6124164e5582efe0c5d11fc85b263437.gif' alt='loading_gif' className='loading'/>}
+                    <img className='img_location' src={url} alt={name_location} onLoad={() => setIsLoading(false)} />
                     <div className="aligment">
                         <h1 className='name_location' onClick={handle_new_suggestion} >{name_location}</h1>
                         <div className="container_days">

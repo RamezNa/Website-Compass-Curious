@@ -8,6 +8,7 @@ import SignUp from "./Login/SignUp/SignUp"
 import Forget from "./Login/Forget/Forget"
 import Footer from "./Footer/Footer"
 import Chat from "./Chat/Chat"
+import Trend from "./Trend/Trend"
 
 function App(){
     const location = useLocation()
@@ -23,6 +24,7 @@ function App(){
                     <Route path="/SignUp" element={<SignUp />} />
                     <Route path="/Forget" element={<Forget />} />
                     <Route path="/Chat" element={<Chat />} />
+                    <Route path="/Trend" element={<Trend />} />
                 </Routes>
             {location.pathname == '/Chat' ? <></> : <Footer />}    
             
