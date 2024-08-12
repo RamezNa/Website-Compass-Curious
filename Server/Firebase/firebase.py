@@ -42,8 +42,8 @@ async def is_in_firestore(collection_name, days):
     # check if the docs is empty if is we make the search using the scrapper :) 
     if not any(docs):
         # make scrapping to get the data 
-        search_for_new_data = Scraper()
-        await search_for_new_data.search(collection_name , days, ['attractions','entertainment'])
+        search_for_new_data = Scraper(days)
+        await search_for_new_data.search(collection_name, ['attractions','entertainment'])
         return True
     
     return False
@@ -67,10 +67,10 @@ async def read_content_from_firestore(collection_name):
     return location_list    
 
 
-# function that help me to read a spesific content from firestore
+# function that help me to read a specific content from firestore
 def get_spesific_content_filtered_by_type_from_firestore(collection_name , type):
 
-    # init varaible that we saved in the data that we recived
+    # init variable that we saved in the data that we received
     location_list = []
 
     doc_ref = db.collection(collection_name)
@@ -112,43 +112,79 @@ def get_document_id(collection_name, query_constraints):
         print("Error getting document IDs:", e)
         return []
     
-async def is_in_firestore_trend(location,days):
+async def is_in_firestore_trend(location,days, task_trend):
     # fetch the data from the firestore
     query = db.collection('_trend').where(filter=FieldFilter('location' , '==' , location))
     data = list(query.stream())
-
+    print('is_in_firestore_trend')
     # make the data in the 
-    if not data:
-        await get_information_and_img(location, days)
+    if not data:  
+        print('not data')
+        await get_information_and_img(location, days, task_trend)
         return 
     # convert to dictionary
     trend = data[0].to_dict()
 
     # check if the day in the list of days in firestore 
     if days not in trend['days']:
+        print('days not in trend[\'days\']')
         trend['days'].append(days)
         update_data('_trend', data[0].id, {'days': trend['days']} )
 
     # update the field numTrend 
     update = trend['numTrend'] + 1  
     update_data('_trend', data[0].id, {'numTrend': update})
+    print('update data')
 
     
-async def get_information_and_img(location,days):
+async def get_information_and_img(location,days, task_trend):
+    print('get_information_and_img')
     try:
-        scraper_engin = Scraper()
+        scraper_engin = Scraper(days)
 
         data = await scraper_engin.search_google(location)
 
         url = None
         while url is None:
-            url = await scraper_engin.get_img_pintrest(location, ' city', ' ')
+            print('while url is None')
+            url = await scraper_engin.get_img_pintrest(location, '+photography', '+travel+wallpaper')
             if url is None:
                 await asyncio.sleep(1)        
 
-        data_to_save = [{'location':location, 'days':[days], 'description': data, 'url': url,'numTrend': 1 }]
+        data_to_save = [{'location':location, 'days':task_trend[location]['day'], 'description': data, 'url': url,'numTrend': task_trend[location]['numDays'] }]
         await add_content_to_firestore('_trend', data_to_save)
+        task_trend[location]['status'] = False
+        print('saved the picture ')
 
     except Exception as e:
         print("Error getting document IDs:", e) 
 
+# Create an asyncio lock
+lock = asyncio.Lock()
+# define variable to save the result
+res = []
+# function the help me to make more than task to make the response faster
+async def task_get_the_image(scraper_engin, location):
+    # get the img from the pintrest
+    url = await scraper_engin.get_img_pintrest(location,'+photography', '+travel+wallpaper')  
+    # save the list the name and the url
+    print('url: ', url)  
+    res.append({'location_name': location, 'url': url})
+
+async def get_the_image(location, codeGen):
+    try:
+        # TODO make the change and the save in the server
+        tasks = []
+        scraper_engin = Scraper(30)
+        for loc in location:
+            task = asyncio.create_task(task_get_the_image(scraper_engin, loc))
+            tasks.append(task)
+            
+        print('i am waiting :)')    
+        await asyncio.gather(*tasks)  
+        
+        # save in the firestore
+        await add_content_to_firestore('_suggestImg', [{ 'codeGen':codeGen , 'res':res}])
+        print('i has been finish')
+    except Exception as e:  
+        print("Error getting the images:", e)   

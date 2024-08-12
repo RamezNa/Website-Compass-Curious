@@ -5,12 +5,10 @@ import asyncio
 import uvicorn
 import signal
 
-#TODO make the server return to the ip and say to him that we finished the search
-#TODO make the scrapper work Faster its take more than i expected from the time 
+
+# ***********************************************************************************
 
 app = Flask(__name__)
-
-task_trend = {}
 
 @app.after_request
 def add_cors_headers(response):
@@ -19,22 +17,51 @@ def add_cors_headers(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
     return response
 
+# ***********************************************************************************
+
+# function that called to the function that get the image and save the all in the firebase
+async def async_suggestion_img(location, codeGen):
+    await get_the_image(location, codeGen)
+
+# Route to get a img of location
+@app.route('/suggestion_based_Love/<string:codeGen>/<location>', methods=['GET'])
+async def get_img_to_the_location(codeGen, location):
+    print('get_img_to_the_location(codeGen, location)')
+    location_list = location.split(',')
+    asyncio.create_task(async_suggestion_img(location_list, codeGen))
+    return 'We are conducting the search.', 202
+
+# ***********************************************************************************
+
+task_trend = {}
+
 # this function is worked to fetch data from the website google and pintrest or add to firestore trend 
 async def async_trend(location, day):
-    await is_in_firestore_trend(location, day)
-
-# this function is help me to make the function work in thread
-def start_trend(location, day):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(async_trend(location, day))
-
+    await is_in_firestore_trend(location, day, task_trend)
+    # remove the task 
+    task_trend.pop(location)
 
 # route to update the firebase and get data and img from the google and pitrest :)
 @app.route('/trend/<string:location>/<int:day>', methods=['GET'])
 async def make_trend(location , day):
+    print('make_trend(location , day)')
+    # check if the location in the task_trend
+    # if the location in the task_trend return that the server work on it else make anew search
+    print(task_trend)
+    
+    if location in task_trend and task_trend[location]['status'] :
+        print('location in task_trend and task_trend[location][\'status\'] :')
+        if day not in task_trend[location]['day']:
+            task_trend[location]['day'].append(day)
+        task_trend[location]['numDays'] += 1
+        return 'Please wait while we determine your location.',202
+   
+    task_trend[location] = {'status': True, 'numDays': 1, 'day': [day]} 
+    print(task_trend)
     asyncio.create_task(async_trend(location, day))
     return 'Successful', 200
+
+# ***********************************************************************************
 
 # this variable is saved the task that i do in the search engine
 tasks = {}
@@ -45,13 +72,6 @@ async def async_work(location, days):
     await is_in_firestore(location, days)
     # remove the task 
     tasks.pop(location)
-
-# this function is help me to make the function work in thread
-def start_me(location, days):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(async_work(location, days))
-
     
 # Route to get a data of location
 @app.route('/suggestion_by_day/<string:location>/<int:days>', methods=['GET'])
@@ -64,6 +84,7 @@ async def get_suggestion(location, days):
     asyncio.create_task(async_work(location, days))
     return 'We are conducting the search.', 202
 
+# ***********************************************************************************
 
 asgi_app = WsgiToAsgi(app)
 
@@ -94,18 +115,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("Server stopped by user")    
 
-# Our main Server :)
-# if __name__ == '__main__':
-
-#     config = uvicorn.Config(asgi_app, host='0.0.0.0', port=8000)
-#     server = uvicorn.Server(config)
-
-#     # Register signal handlers
-#     signal.signal(signal.SIGINT, lambda sig, frame: handle_signal(server))
-#     signal.signal(signal.SIGTERM, lambda sig, frame: handle_signal(server))
-    
-#     try:
-#         server.run()
-#     except KeyboardInterrupt:
-#         print("Server stopped by user")
 
