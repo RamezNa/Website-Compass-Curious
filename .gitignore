@@ -5,3 +5,4 @@ FronEnd/setup GitHub SSH
 .gitignore
 FronEnd/src/Firebase/firebase.js
 FronEnd/src/component/Code/giminiApi.js
+Server/.vscode/settings.json
